@@ -10,9 +10,9 @@ MacOS App to compile Opencore, common drivers and kexts that are used with OpenC
 - [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg.git)
 - [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell.git)
 
-![](https://github.com/Pavo-IM/ocbuilder/tree/master/images/start.png)
+<img src="images/start.png" /> ![](https://github.com/Pavo-IM/ocbuilder/tree/master/images/start.png)
 
-![](https://github.com/Pavo-IM/ocbuilder/tree/master/images/complete.png)
+<img src="images/complete.png" /> ![](https://github.com/Pavo-IM/ocbuilder/tree/master/images/complete.png)
 
 ## This app requires the full Xcode app installed in order to compile the source. You also must agree to the User Agreement after installing Xcode app.
 You can install Xcode directly from the following link
