@@ -49,12 +49,20 @@ FINAL_DIR="${2}/OCBuilder_Completed"
 if [ ! -x /usr/local/bin/nasm ]; then
   echo "Installing Required NASM tool"
   sudo cp "${5}" /usr/local/bin
+fi
+
+if [ ! -x /usr/local/bin/ndisasm ]; then
+  echo "Installing Required ndisasm tool"
   sudo cp "${8}" /usr/local/bin
 fi
 
 if [ ! -x /usr/local/bin/mtoc ]; then
   echo "Install Required MTOC tool"
   sudo cp "${6}" /usr/local/bin
+fi
+
+if [ ! -x /usr/local/bin/mtoc.NEW ]; then
+  echo "Install Required MTOC.NEW tool"
   sudo cp "${9}" /usr/local/bin
 fi
 
