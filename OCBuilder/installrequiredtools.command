@@ -277,7 +277,7 @@ repocheck() {
       name=OpenCoreShell
   fi
   localoutput=$(git rev-parse HEAD)
-  remoteoutput=$(git rev-parse master@{upstream})
+  remoteoutput=$(git ls-remote origin master | cut -b 1-40)
   
   if [ "$localoutput" = "$remoteoutput" ] ; then
     status="0"
@@ -288,7 +288,7 @@ repocheck() {
     echo "$result repo is up to date..."
   elif [ "$status" == "1" ]; then
     echo "$result repo is not up to date..."
-    echo "Updating Repo"
+    echo "Updating the $result Repo"
     git pull >/dev/null || exit 1
   fi
 }
