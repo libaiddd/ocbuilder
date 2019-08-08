@@ -248,353 +248,140 @@ copyBuildProducts() {
   echo "All Done!..."
 }
 
-repocheck() {
-  local name=$(pwd)
-  local result=${name##*/}
-  if [ result == "Lilu" ]
-  then
-    name=Lilu
-  elif [ result == "WhateverGreen" ]
-  then
-    name=WhateverGreen
-  elif [ result == "CPUFriend" ]
-  then
-    name=CPUFriend
-  elif [ result == "AppleALC" ]
-  then
-    name=AppleALC
-  elif [ result == "VirtualSMC" ]
-  then
-    name=VirtualSMC
-  elif [ result == "OpenCorePkg" ]
-  then
-      name=OpenCorePkg
-  elif [ result == "AppleSupportPkg" ]
-  then
-      name=AppleSupportPkg
-  elif [ result == "OpenCoreShell" ]
-  then
-      name=OpenCoreShell
-  fi
-  localoutput=$(git rev-parse HEAD)
-  remoteoutput=$(git ls-remote origin master | cut -b 1-40)
-  
-  if [ "$localoutput" = "$remoteoutput" ] ; then
-    status="0"
-  else
-    status="1"
-  fi
-  if [ "$status" == "0" ]; then
-    echo "$result repo is up to date..."
-  elif [ "$status" == "1" ]; then
-    echo "$result repo is not up to date..."
-    echo "Updating the $result Repo"
-    git pull >/dev/null || exit 1
-  fi
-}
-
-if [ ! -d "${BUILD_DIR}" ] ; then
+if [ ! -d "${BUILD_DIR}" ]; then
+  mkdir -p "${BUILD_DIR}"
+else
+  rm -rf "${BUILD_DIR}/"
   mkdir -p "${BUILD_DIR}"
 fi
 
 cd "${BUILD_DIR}"
 
-if [ ! -d Lilu ] ; then
-  echo "Cloning Lilu repo..."
-  git clone https://github.com/acidanthera/Lilu.git >/dev/null || exit 1
-  cd "${BUILD_DIR}/Lilu"
-  buildliludebug
-  buildlilurelease
-else
-  echo "Checking Lilu repo for updates..."
-  cd "${BUILD_DIR}/Lilu"
-  repocheck
-  if [ "$status" == "1" ]; then
-    buildliludebug
-    buildlilurelease
-  fi
-fi
+echo "Cloning Lilu repo..."
+git clone https://github.com/acidanthera/Lilu.git >/dev/null || exit 1
+cd "${BUILD_DIR}/Lilu"
+buildliludebug
+buildlilurelease
 
 cd "${BUILD_DIR}"
 
-if [ ! -d AppleALC ] ; then
-  echo "Cloning AppleALC repo..."
-  git clone https://github.com/acidanthera/AppleALC.git >/dev/null || exit 1
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AppleALC"
-  cd "${BUILD_DIR}/AppleALC"
-  buildapplealcrelease
-else
-  echo "Checking AppleALC repo for updates..."
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AppleALC"
-  cd "${BUILD_DIR}/AppleALC"
-  repocheck
-  if [ "$status" == "1" ]; then
-    buildapplealcrelease
-  fi
-fi
+echo "Cloning AppleALC repo..."
+git clone https://github.com/acidanthera/AppleALC.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AppleALC"
+cd "${BUILD_DIR}/AppleALC"
+buildapplealcrelease
 
 cd "${BUILD_DIR}"
 
-if [ ! -d WhateverGreen ] ; then
-  echo "Cloning WhateverGreen repo..."
-  git clone https://github.com/acidanthera/WhateverGreen.git >/dev/null || exit 1
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/WhateverGreen"
-  cd "${BUILD_DIR}/WhateverGreen"
-  buildwegrelease
-else
-  echo "Checking WhateverGreen repo for updates..."
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/WhateverGreen"
-  cd "${BUILD_DIR}/WhateverGreen"
-  repocheck
-  if [ "$status" == "1" ]; then
-    buildwegrelease
-  fi
-fi
+echo "Cloning WhateverGreen repo..."
+git clone https://github.com/acidanthera/WhateverGreen.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/WhateverGreen"
+cd "${BUILD_DIR}/WhateverGreen"
+buildwegrelease
 
 cd "${BUILD_DIR}"
 
-if [ ! -d VirtualSMC ] ; then
-  echo "Cloning VirtualSMC repo..."
-  git clone https://github.com/acidanthera/VirtualSMC.git >/dev/null || exit 1
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/VirtualSMC"
-  cd "${BUILD_DIR}/VirtualSMC"
-  buildvirtualsmcrelease
-else
-  echo "Checking VirtualSMC repo for updates..."
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/VirtualSMC"
-  cd "${BUILD_DIR}/VirtualSMC"
-  repocheck
-  if [ "$status" == "1" ]; then
-    buildvirtualsmcrelease
-  fi
-fi
+echo "Cloning VirtualSMC repo..."
+git clone https://github.com/acidanthera/VirtualSMC.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/VirtualSMC"
+cd "${BUILD_DIR}/VirtualSMC"
+buildvirtualsmcrelease
 
 cd "${BUILD_DIR}"
 
-if [ ! -d CPUFriend ] ; then
-  echo "Cloning CPUFriend repo..."
-  git clone https://github.com/acidanthera/CPUFriend.git >/dev/null || exit 1
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/CPUFriend"
-  cd "${BUILD_DIR}/CPUFriend"
-  buildcpufriendrelease
-else
-  echo "Checking CPUFriend repo for updates..."
-  cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/CPUFriend"
-  cd "${BUILD_DIR}/CPUFriend"
-  repocheck
-  if [ "$status" == "1" ]; then
-    buildcpufriendrelease
-  fi
-fi
+echo "Cloning CPUFriend repo..."
+git clone https://github.com/acidanthera/CPUFriend.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/CPUFriend"
+cd "${BUILD_DIR}/CPUFriend"
+buildcpufriendrelease
 
 cd "${BUILD_DIR}"
 
-if [ ! -d OpenCorePkg ] ; then
-  opencoreclone
-  cd "${BUILD_DIR}/OpenCorePkg"
-  if [ ! -d "Binaries" ]; then
-    mkdir Binaries
-    cd Binaries
-    ln -s ../UDK/Build/OpenCorePkg/RELEASE_XCODE5/X64 RELEASE
-    cd ..
-  fi
-  opencoreudkclone
-  cd UDK
-  opencorepkgclone
-  if [ ! -d OpenCorePkg ]; then
-      ln -s .. OpenCorePkg
-  fi
-  make -C BaseTools >/dev/null || exit 1
-  sleep 1
-  export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-  export NASM_PREFIX=/usr/local/bin/
-  source edksetup.sh --reconfig >/dev/null
-  sleep 1
-  echo "Compiling the latest commited Release version of OpenCorePkg..."
-  build -a X64 -b RELEASE -t XCODE5 -p OpenCorePkg/OpenCorePkg.dsc >/dev/null || exit 1
-  
-  cd .. >/dev/null || exit 1
-  opencorepackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
-else
-  echo "Checking OpenCorePkg repo for updates..."
-  cd "${BUILD_DIR}/OpenCorePkg"
-  repocheck
-  if [ "$status" == "1" ]; then
-    rm -rf UDK
-    if [ ! -d "Binaries" ]; then
-      mkdir Binaries
-      cd Binaries
-      ln -s ../UDK/Build/OpenCorePkg/RELEASE_XCODE5/X64 RELEASE
-      cd ..
-    fi
-    opencoreudkclone
-    cd UDK
-    opencorepkgclone
-    if [ ! -d OpenCorePkg ]; then
-        ln -s .. OpenCorePkg
-    fi
-    make -C BaseTools >/dev/null || exit 1
-    sleep 1
-    unset WORKSPACE
-    unset EDK_TOOLS_PATH
-    export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-    export NASM_PREFIX=/usr/local/bin/
-    source edksetup.sh --reconfig >/dev/null
-    sleep 1
-    echo "Compiling the latest commited Release version of OpenCorePkg..."
-    build -a X64 -b RELEASE -t XCODE5 -p OpenCorePkg/OpenCorePkg.dsc >/dev/null || exit 1
-    
-    cd .. >/dev/null || exit 1
-    opencorepackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
-  fi
-fi
+opencoreclone
+cd "${BUILD_DIR}/OpenCorePkg"
+mkdir Binaries
+cd Binaries
+ln -s ../UDK/Build/OpenCorePkg/RELEASE_XCODE5/X64 RELEASE
+cd ..
+opencoreudkclone
+cd UDK
+opencorepkgclone
+ln -s .. OpenCorePkg
+make -C BaseTools >/dev/null || exit 1
+sleep 1
+export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
+export NASM_PREFIX=/usr/local/bin/
+source edksetup.sh --reconfig >/dev/null
+sleep 1
+echo "Compiling the latest commited Release version of OpenCorePkg..."
+build -a X64 -b RELEASE -t XCODE5 -p OpenCorePkg/OpenCorePkg.dsc >/dev/null || exit 1
+
+cd .. >/dev/null || exit 1
+opencorepackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 
 cd "${BUILD_DIR}"
 
-if [ ! -d "AppleSupportPkg" ]; then
-  applesupportclone
-  cd "${BUILD_DIR}/AppleSupportPkg"
-  if [ ! -d "Binaries" ]; then
-    mkdir Binaries >/dev/null || exit 1
-    cd Binaries >/dev/null || exit 1
-    ln -s ../UDK/Build/AppleSupportPkg/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
-    cd .. >/dev/null || exit 1
-  fi
-  applesupportudkclone
-  cd UDK
-  applesupportpkgclone
-  if [ ! -d AppleSupportPkg ]; then
-    ln -s .. AppleSupportPkg >/dev/null || exit 1
-  fi
-  make -C BaseTools >/dev/null || exit 1
-  sleep 1
-  unset WORKSPACE
-  unset EDK_TOOLS_PATH
-  export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-  export NASM_PREFIX=/usr/local/bin/
-  source edksetup.sh --reconfig >/dev/null || exit 1
-  sleep 1
-  echo "Compiling the latest commited Release version of AppleSupportPkg..."
-  build -a X64 -b RELEASE -t XCODE5 -p AppleSupportPkg/AppleSupportPkg.dsc >/dev/null || exit 1
-  
-  cd .. >/dev/null || exit 1
-  applesupportpackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
-else
-  echo "Checking AppleSupportPkg repo for updates..."
-  cd "${BUILD_DIR}/AppleSupportPkg"
-  repocheck
-  if [ "$status" == "1" ]; then
-    rm -rf UDK
-    if [ ! -d "Binaries" ]; then
-      mkdir Binaries >/dev/null || exit 1
-      cd Binaries >/dev/null || exit 1
-      ln -s ../UDK/Build/AppleSupportPkg/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
-      cd .. >/dev/null || exit 1
-    fi
-    applesupportudkclone
-    cd UDK
-    applesupportpkgclone
-    if [ ! -d AppleSupportPkg ]; then
-    ln -s .. AppleSupportPkg >/dev/null || exit 1
-    fi
-    make -C BaseTools >/dev/null || exit 1
-    sleep 1
-    unset WORKSPACE
-    unset EDK_TOOLS_PATH
-    export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-    export NASM_PREFIX=/usr/local/bin/
-    source edksetup.sh --reconfig >/dev/null || exit 1
-    sleep 1
-    echo "Compiling the latest commited Release version of AppleSupportPkg..."
-    build -a X64 -b RELEASE -t XCODE5 -p AppleSupportPkg/AppleSupportPkg.dsc >/dev/null || exit 1
-    
-    cd .. >/dev/null || exit 1
-    applesupportpackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
-  fi
-fi
+applesupportclone
+cd "${BUILD_DIR}/AppleSupportPkg"
+mkdir Binaries >/dev/null || exit 1
+cd Binaries >/dev/null || exit 1
+ln -s ../UDK/Build/AppleSupportPkg/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
+cd .. >/dev/null || exit 1
+applesupportudkclone
+cd UDK
+applesupportpkgclone
+ln -s .. AppleSupportPkg >/dev/null || exit 1
+make -C BaseTools >/dev/null || exit 1
+sleep 1
+unset WORKSPACE
+unset EDK_TOOLS_PATH
+export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
+export NASM_PREFIX=/usr/local/bin/
+source edksetup.sh --reconfig >/dev/null || exit 1
+sleep 1
+echo "Compiling the latest commited Release version of AppleSupportPkg..."
+build -a X64 -b RELEASE -t XCODE5 -p AppleSupportPkg/AppleSupportPkg.dsc >/dev/null || exit 1
+
+cd .. >/dev/null || exit 1
+applesupportpackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 
 cd "${BUILD_DIR}"
 
-if [ ! -d "OpenCoreShell" ]; then
-  opencoreshellclone
-  cd "${BUILD_DIR}/OpenCoreShell"
-  if [ ! -d "Binaries" ]; then
-    mkdir Binaries >/dev/null || exit 1
-    cd Binaries >/dev/null || exit 1
-    ln -s ../UDK/Build/Shell/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
-    cd .. >/dev/null || exit 1
-  fi
-  ocshelludkclone
-  cd UDK
-  HASH=$(git rev-parse origin/UDK2018)
-  if [ ! -d AppleSupportPkg ]; then
-    ln -s .. AppleSupportPkg >/dev/null || exit 1
-  fi
-  make -C BaseTools >/dev/null || exit 1
-  sleep 1
-  unset WORKSPACE
-  unset EDK_TOOLS_PATH
-  export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-  export NASM_PREFIX=/usr/local/bin/
-  source edksetup.sh --reconfig >/dev/null
-  sleep 1
-  if [ ! -f patches.ready ]; then
-    for i in ../Patches/* ; do
-      git apply "$i" >/dev/null || exit 1
-      git add * >/dev/null || exit 1
-      git commit -m "Applied patch $i" >/dev/null || exit 1
-    done
-    touch patches.ready
-  fi
-  echo "Compiling the latest commited Release version of OpenCoreShellPkg..."
-  build -a X64 -b RELEASE -t XCODE5 -p ShellPkg/ShellPkg.dsc >/dev/null || exit 1
-  cd .. >/dev/null || exit 1
-  ocshellpackage "Binaries/RELEASE" "RELEASE" "$HASH" >/dev/null || exit 1
-else
-  echo "Checking OpenCoreShell repo for updates..."
-  cd "${BUILD_DIR}/OpenCoreShell"
-  repocheck
-  if [ "$status" == "1" ]; then
-    rm -rf UDK
-    if [ ! -d "Binaries" ]; then
-      mkdir Binaries >/dev/null || exit 1
-      cd Binaries >/dev/null || exit 1
-      ln -s ../UDK/Build/Shell/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
-      cd .. >/dev/null || exit 1
-    fi
-    ocshelludkclone
-    cd UDK
-    HASH=$(git rev-parse origin/UDK2018)
-    if [ ! -d AppleSupportPkg ]; then
-      ln -s .. AppleSupportPkg >/dev/null || exit 1
-    fi
-    make -C BaseTools >/dev/null || exit 1
-    sleep 1
-    unset WORKSPACE
-    unset EDK_TOOLS_PATH
-    export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-    export NASM_PREFIX=/usr/local/bin/
-    source edksetup.sh --reconfig >/dev/null
-    sleep 1
-    if [ ! -f patches.ready ]; then
-      for i in ../Patches/* ; do
-          git apply "$i" >/dev/null || exit 1
-          git add * >/dev/null || exit 1
-          git commit -m "Applied patch $i" >/dev/null || exit 1
-      done
-      touch patches.ready
-    fi
-    echo "Compiling the latest commited Release version of OpenCoreShellPkg..."
-    build -a X64 -b RELEASE -t XCODE5 -p ShellPkg/ShellPkg.dsc >/dev/null || exit 1
-    cd .. >/dev/null || exit 1
-    ocshellpackage "Binaries/RELEASE" "RELEASE" "$HASH" >/dev/null || exit 1
-  fi
-fi
+opencoreshellclone
+cd "${BUILD_DIR}/OpenCoreShell"
+mkdir Binaries >/dev/null || exit 1
+cd Binaries >/dev/null || exit 1
+ln -s ../UDK/Build/Shell/RELEASE_XCODE5/X64 RELEASE >/dev/null || exit 1
+cd .. >/dev/null || exit 1
+ocshelludkclone
+cd UDK
+HASH=$(git rev-parse origin/UDK2018)
+ln -s .. AppleSupportPkg >/dev/null || exit 1
+make -C BaseTools >/dev/null || exit 1
+sleep 1
+unset WORKSPACE
+unset EDK_TOOLS_PATH
+export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
+export NASM_PREFIX=/usr/local/bin/
+source edksetup.sh --reconfig >/dev/null
+sleep 1
+for i in ../Patches/* ; do
+    git apply "$i" >/dev/null || exit 1
+    git add * >/dev/null || exit 1
+    git commit -m "Applied patch $i" >/dev/null || exit 1
+done
+touch patches.ready
+echo "Compiling the latest commited Release version of OpenCoreShellPkg..."
+build -a X64 -b RELEASE -t XCODE5 -p ShellPkg/ShellPkg.dsc >/dev/null || exit 1
+cd .. >/dev/null || exit 1
+ocshellpackage "Binaries/RELEASE" "RELEASE" "$HASH" >/dev/null || exit 1
 
 if [ ! -d "${FINAL_DIR}" ]; then
   mkdir -p "${FINAL_DIR}"
   copyBuildProducts
+  rm -rf "${BUILD_DIR}/"
 else
   rm -rf "${FINAL_DIR}"/*
   copyBuildProducts
+  rm -rf "${BUILD_DIR}/"
 fi
