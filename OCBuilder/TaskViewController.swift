@@ -13,10 +13,11 @@ class TaskViewController: NSViewController {
     @IBOutlet var pathLocation: NSPathControl!
     @IBOutlet var outputText: NSTextView!
     @IBOutlet var buildButton: NSButton!
-    @IBOutlet var cloneLocation: NSPathControl!
     @IBOutlet var progressBar: NSProgressIndicator!
+    @IBOutlet var stopButton: NSButton!
     
     override func viewDidLoad() {
+        stopButton.isEnabled = false
         progressBar.isHidden = true
         super.viewDidLoad()
         if (NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") != nil) {
@@ -25,7 +26,6 @@ class TaskViewController: NSViewController {
             showCloseAlert()
             buildButton.isHidden = true
             pathLocation.isHidden = true
-            cloneLocation.isHidden = true
         }
     }
     
@@ -34,10 +34,11 @@ class TaskViewController: NSViewController {
     var buildTask:Process!
     
     @IBAction func startTask(_ sender: Any) {
+        stopButton.isEnabled = true
         progressBar.isHidden = false
         outputText.string = ""
-        if let cloneURL = cloneLocation.url, let repositoryURL = pathLocation.url {
-            let cloneLocation = cloneURL.path
+        if let repositoryURL = pathLocation.url {
+            let cloneLocation = "/tmp"
             let finalLocation = repositoryURL.path
             let nasm = "/usr/local/bin/nasm"
             let mtoc = "/usr/local/bin/mtoc"
@@ -80,6 +81,7 @@ class TaskViewController: NSViewController {
     
     
     @IBAction func stopTask(_ sender: Any) {
+        stopButton.isEnabled = false
         progressBar.isHidden = true
         if isRunning {
             self.progressBar.doubleValue = 0.0
@@ -101,6 +103,7 @@ class TaskViewController: NSViewController {
             self.buildTask.terminationHandler = {
                 task in
                 DispatchQueue.main.async(execute: {
+                    self.stopButton.isEnabled = false
                     self.buildButton.isEnabled = true
                     self.progressBar.isHidden = true
                     self.progressBar.stopAnimation(self)
