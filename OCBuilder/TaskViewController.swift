@@ -17,6 +17,8 @@ class TaskViewController: NSViewController {
     @IBOutlet var stopButton: NSButton!
     
     override func viewDidLoad() {
+        
+        
         stopButton.isEnabled = false
         progressBar.isHidden = true
         super.viewDidLoad()
