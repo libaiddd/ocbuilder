@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #  installrequiredtools.command
 #  OCBuilder
@@ -380,8 +380,10 @@ if [ ! -d "${FINAL_DIR}" ]; then
   mkdir -p "${FINAL_DIR}"
   copyBuildProducts
   rm -rf "${BUILD_DIR}/"
+  open -a Safari https://insanelymacdiscord.github.io/Getting-Started-With-OpenCore/
 else
   rm -rf "${FINAL_DIR}"/*
   copyBuildProducts
   rm -rf "${BUILD_DIR}/"
+  open -a Safari https://insanelymacdiscord.github.io/Getting-Started-With-OpenCore/
 fi
