@@ -6,6 +6,14 @@ MacOS App to compile Opencore, common drivers and kexts that are used with OpenC
 - [WhateverGreen](https://github.com/acidanthera/WhateverGreen.git)
 - [AppleALC](https://github.com/acidanthera/AppleALC.git)
 - [VirtualSMC](https://github.com/acidanthera/VirtualSMC.git)
+- [CPUFriend](https://github.com/acidanthera/CPUFriend.git)
+- [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup.git)
+- [ATH9KFixup](https://github.com/chunnann/ATH9KFixup.git)
+- [BT4LEContinuityFixup](https://github.com/acidanthera/BT4LEContinuityFixup.git)
+- [DiskArbitrationFixup](https://github.com/Goldfish64/DiskArbitrationFixup.git)
+- [HibernationFixup](https://github.com/acidanthera/HibernationFixup.git)
+- [NoTouchID](https://github.com/al3xtjames/NoTouchID.git)
+- [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup.git)
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg.git)
 - [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg.git)
 - [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell.git)
@@ -14,7 +22,7 @@ MacOS App to compile Opencore, common drivers and kexts that are used with OpenC
 You can install Xcode directly from the following link
 - [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
-This app will check to see if you have all the required tools installed in order to compile these sources. If the required tools are not installed, it will install them for you, except for the full application of Xcode. It will give you an alert warning you that you do not have Xcode installed and give you the download link. This app gives you two locations to select for, first selection is for where you want to save the cloned repos (for later use) and the second selection is for where you want to save the completed builds folder(for when everything has been compiled). When you click the Build button it will compile the latest commits to the sources using xcodebuild, nasm, and mtoc. Once compile is complete a OCBuilder_Completed folder with the Opencore EFI structure will be produced with all the Drivers, kexts and tools will be placed in the OCBuilder_Completed folder on the location of your selection. You may not need all of them, so make sure you remove any Drivers or Kext you do not need. "They are examples only. You have been WARNED!!!!" 
+This app will check to see if you have all the required tools installed in order to compile these sources. If the required tools are not installed, it will install them for you, except for the full application of Xcode. It will give you an alert warning you that you do not have Xcode installed and give you the download link. This app gives you choice for selection on where you want to save the completed builds folder(for when everything has been compiled). When you click the Build button it will compile the latest commits to the sources using xcodebuild, nasm, and mtoc. Once compile has completed a OCBuilder_Completed folder with the Opencore EFI structure will be produced with all the Drivers, kexts and tools will be placed in the OCBuilder_Completed folder on the location of your selection. You may not need all of them, so make sure you remove any Drivers or Kext you do not need. "They are examples only. You have been WARNED!!!!" 
 
 ## Discord To chat with Devs and help with Opencore
 - [Insanelymac Discord](https://discord.gg/sWxNTSx)
