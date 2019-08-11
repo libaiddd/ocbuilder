@@ -10,10 +10,6 @@ MacOS App to compile Opencore, common drivers and kexts that are used with OpenC
 - [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg.git)
 - [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell.git)
 
-<img src="images/start.png" />
-
-<img src="images/complete.png" />
-
 ## This app requires the full Xcode app installed in order to compile the source. You also must agree to the User Agreement after installing Xcode app.
 You can install Xcode directly from the following link
 - [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
@@ -48,7 +44,7 @@ This app will check to see if you have all the required tools installed in order
 |   |   |   |   |--ApfsDriverLoader.efi
 |   |   |   |   |--AppleGenericInput.efi
 |   |   |   |   |--AppleUiSupport.efi
-|   |   |   |   |--AptioMemoryFix.efi
+|   |   |   |   |--FwRuntimeService.efi
 |   |   |   |   |--UsbKbDxe.efi
 |   |   |   |   |--VBoxHfs.efi
 |   |   |   |   |--VirtualSmc.efi
