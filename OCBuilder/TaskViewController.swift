@@ -133,7 +133,7 @@ class TaskViewController: NSViewController {
                 self.outputText.string = nextOutput
                 let range = NSRange(location:nextOutput.count,length:0)
                 self.outputText.scrollRangeToVisible(range)
-                self.progressBar.increment(by: 2.9)
+                self.progressBar.increment(by: 1.9)
             })
             self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
         }

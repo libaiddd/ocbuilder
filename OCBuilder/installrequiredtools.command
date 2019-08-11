@@ -72,40 +72,12 @@ if [ ! -x "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" ]; the
   sudo installer -pkg /tmp/*.pkg -target /
 fi
 
-buildlilurelease() {
-  echo "Compiling the latest commited Release version of Lilu..."
+buildrelease() {
   xcodebuild -configuration Release  >/dev/null || exit 1
-  echo "Lilu Release Completed..."
 }
 
-buildliludebug() {
-  echo "Compiling the latest commited Debug version of Lilu..."
+builddebug() {
   xcodebuild -configuration Debug  >/dev/null || exit 1
-  echo "Lilu Debug Completed..."
-}
-
-buildapplealcrelease() {
-  echo "Compiling the latest commited Release version of AppleALC..."
-  xcodebuild -configuration Release  >/dev/null || exit 1
-  echo "AppleALC Release Completed..."
-}
-
-buildwegrelease() {
-  echo "Compiling the latest commited Release version of WhateverGreen..."
-  xcodebuild -configuration Release  >/dev/null || exit 1
-  echo "WhateverGreen Release Completed..."
-}
-
-buildvirtualsmcrelease() {
-  echo "Compiling the latest commited Release version of VirtualSMC..."
-  xcodebuild -configuration Release  >/dev/null || exit 1
-  echo "VirtualSMC Release Completed..."
-}
-
-buildcpufriendrelease() {
-  echo "Compiling the latest commited Release version of CPUFriend..."
-  xcodebuild -configuration Release  >/dev/null || exit 1
-  echo "CPUFriend Release Completed..."
 }
 
 ocshellpackage() {
@@ -237,6 +209,17 @@ copyBuildProducts() {
   cp -r "${BUILD_DIR}"/VirtualSMC/build/Release/*.kext "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/WhateverGreen/build/Release/WhateverGreen.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/CPUFriend/build/Release/CPUFriend.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/AirportBrcmFixup/build/Release/AirportBrcmFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/ATH9KFixup/build/Release/ATH9KFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/BT4LEContinuityFixup/build/Release/BT4LEContinuityFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/DiskArbitrationFixup/build/Release/DiskArbitrationFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/HibernationFixup/build/Release/HibernationFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/NoTouchID/build/Release/NoTouchID.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/RTCMemoryFixup/build/Release/RTCMemoryFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/IntelMausiEthernet/build/Release/IntelMausiEthernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/AtherosE2200Ethernet/build/Release/AtherosE2200Ethernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/TSCAdjustReset/build/Release/TSCAdjustReset.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/RTL8111_driver_for_OS_X/build/Release/RealtekRTL8111.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/VirtualSMC/EfiDriver/VirtualSmc.efi" "${FINAL_DIR}"/EFI/OC/Drivers
   cp -r "${BUILD_DIR}/OpenCoreShell/Binaries/RELEASE/Shell.efi" "${FINAL_DIR}"/EFI/OC/Tools
   cd "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE
@@ -260,8 +243,13 @@ cd "${BUILD_DIR}"
 echo "Cloning Lilu repo..."
 git clone https://github.com/acidanthera/Lilu.git >/dev/null || exit 1
 cd "${BUILD_DIR}/Lilu"
-buildliludebug
-buildlilurelease
+echo "Compiling the latest commited Debug version of Lilu..."
+builddebug
+echo "Lilu Debug Completed..."
+sleep 1
+echo "Compiling the latest commited Release version of Lilu..."
+buildrelease
+echo "Lilu Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -269,7 +257,9 @@ echo "Cloning AppleALC repo..."
 git clone https://github.com/acidanthera/AppleALC.git >/dev/null || exit 1
 cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AppleALC"
 cd "${BUILD_DIR}/AppleALC"
-buildapplealcrelease
+echo "Compiling the latest commited Release version of AppleALC..."
+buildrelease
+echo "AppleALC Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -277,7 +267,9 @@ echo "Cloning WhateverGreen repo..."
 git clone https://github.com/acidanthera/WhateverGreen.git >/dev/null || exit 1
 cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/WhateverGreen"
 cd "${BUILD_DIR}/WhateverGreen"
-buildwegrelease
+echo "Compiling the latest commited Release version of WhateverGreen..."
+buildrelease
+echo "WhateverGreen Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -285,7 +277,9 @@ echo "Cloning VirtualSMC repo..."
 git clone https://github.com/acidanthera/VirtualSMC.git >/dev/null || exit 1
 cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/VirtualSMC"
 cd "${BUILD_DIR}/VirtualSMC"
-buildvirtualsmcrelease
+echo "Compiling the latest commited Release version of VirtualSMC..."
+buildrelease
+echo "VirtualSMC Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -293,7 +287,115 @@ echo "Cloning CPUFriend repo..."
 git clone https://github.com/acidanthera/CPUFriend.git >/dev/null || exit 1
 cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/CPUFriend"
 cd "${BUILD_DIR}/CPUFriend"
-buildcpufriendrelease
+echo "Compiling the latest commited Release version of CPUFriend..."
+buildrelease
+echo "CPUFriend Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning AirportBrcmFixup repo..."
+git clone https://github.com/acidanthera/AirportBrcmFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AirportBrcmFixup"
+cd "${BUILD_DIR}/AirportBrcmFixup"
+echo "Compiling the latest commited Release version of AirportBrcmFixup..."
+buildrelease
+echo "AirportBrcmFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning ATH9KFixup repo..."
+git clone https://github.com/chunnann/ATH9KFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/ATH9KFixup"
+cd "${BUILD_DIR}/ATH9KFixup"
+echo "Compiling the latest commited Release version of ATH9KFixup..."
+buildrelease
+echo "ATH9KFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning BT4LEContinuityFixup repo..."
+git clone https://github.com/acidanthera/BT4LEContinuityFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/BT4LEContinuityFixup"
+cd "${BUILD_DIR}/BT4LEContinuityFixup"
+echo "Compiling the latest commited Release version of BT4LEContinuityFixup..."
+buildrelease
+echo "BT4LEContinuityFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning DiskArbitrationFixup repo..."
+git clone https://github.com/Goldfish64/DiskArbitrationFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/DiskArbitrationFixup"
+cd "${BUILD_DIR}/DiskArbitrationFixup"
+echo "Compiling the latest commited Release version of DiskArbitrationFixup..."
+buildrelease
+echo "DiskArbitrationFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning HibernationFixup repo..."
+git clone https://github.com/acidanthera/HibernationFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/HibernationFixup"
+cd "${BUILD_DIR}/HibernationFixup"
+echo "Compiling the latest commited Release version of HibernationFixup..."
+buildrelease
+echo "HibernationFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning NoTouchID repo..."
+git clone https://github.com/al3xtjames/NoTouchID.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/NoTouchID"
+cd "${BUILD_DIR}/NoTouchID"
+echo "Compiling the latest commited Release version of NoTouchID..."
+buildrelease
+echo "NoTouchID Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning RTCMemoryFixup repo..."
+git clone https://github.com/acidanthera/RTCMemoryFixup.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/RTCMemoryFixup"
+cd "${BUILD_DIR}/RTCMemoryFixup"
+echo "Compiling the latest commited Release version of RTCMemoryFixup..."
+buildrelease
+echo "RTCMemoryFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning IntelMausiEthernet repo..."
+git clone https://github.com/Mieze/IntelMausiEthernet.git >/dev/null || exit 1
+cd "${BUILD_DIR}/IntelMausiEthernet"
+echo "Compiling the latest commited Release version of IntelMausiEthernet..."
+buildrelease
+echo "IntelMausiEthernet Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning AtherosE2200Ethernet repo..."
+git clone https://github.com/Mieze/AtherosE2200Ethernet.git >/dev/null || exit 1
+cd "${BUILD_DIR}/AtherosE2200Ethernet"
+echo "Compiling the latest commited Release version of AtherosE2200Ethernet..."
+buildrelease
+echo "AtherosE2200Ethernet Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning RealtekRTL8111 repo..."
+git clone https://github.com/Mieze/RTL8111_driver_for_OS_X.git >/dev/null || exit 1
+cd "${BUILD_DIR}/RTL8111_driver_for_OS_X"
+echo "Compiling the latest commited Release version of RealtekRTL8111..."
+buildrelease
+echo "RealtekRTL8111 Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning TSCAdjustReset repo..."
+git clone https://github.com/interferenc/TSCAdjustReset.git >/dev/null || exit 1
+cd "${BUILD_DIR}/TSCAdjustReset"
+echo "Compiling the latest commited Release version of TSCAdjustReset..."
+buildrelease
+echo "TSCAdjustReset Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -379,11 +481,11 @@ ocshellpackage "Binaries/RELEASE" "RELEASE" "$HASH" >/dev/null || exit 1
 if [ ! -d "${FINAL_DIR}" ]; then
   mkdir -p "${FINAL_DIR}"
   copyBuildProducts
-  rm -rf "${BUILD_DIR}/"
+#  rm -rf "${BUILD_DIR}/"
   open -a Safari https://insanelymacdiscord.github.io/Getting-Started-With-OpenCore/
 else
   rm -rf "${FINAL_DIR}"/*
   copyBuildProducts
-  rm -rf "${BUILD_DIR}/"
+#  rm -rf "${BUILD_DIR}/"
   open -a Safari https://insanelymacdiscord.github.io/Getting-Started-With-OpenCore/
 fi
