@@ -147,7 +147,6 @@ opencorepackage() {
   cp -r "${selfdir}/UDK/OcSupportPkg/Utilities/BootInstall" tmp/Utilities/ >/dev/null || exit 1
   cp -r "${selfdir}/UDK/OcSupportPkg/Utilities/CreateVault" tmp/Utilities/ >/dev/null || exit 1
   cp -r "${selfdir}/UDK/OcSupportPkg/Utilities/LogoutHook" tmp/Utilities/ >/dev/null || exit 1
-  cp -r "${selfdir}/UDK/OcSupportPkg/Utilities/Recovery" tmp/Utilities/ >/dev/null || exit 1
   pushd tmp >/dev/null || exit 1
   zip -qry -FS ../"OpenCore-${ver}-${2}.zip" * >/dev/null || exit 1
   popd >/dev/null || exit 1
