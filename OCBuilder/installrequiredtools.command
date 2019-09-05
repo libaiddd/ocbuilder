@@ -41,6 +41,10 @@ sudo () {
 BUILD_DIR="${1}/OCBuilder_Clone"
 FINAL_DIR="${2}/OCBuilder_Completed"
 
+sudo rm -rf /usr/local/bin/mtoc*
+sudo rm -rf /usr/local/bin/nasm*
+sudo rm -rf /usr/local/bin/ndisasm*
+
 if [ ! -x /usr/local/bin/nasm ]; then
   echo "Installing Required NASM tool"
   sudo cp "${5}" /usr/local/bin
