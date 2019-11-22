@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */; };
+		CF0C453522F0E19F00D5AF7D /* requiredtools.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* requiredtools.command */; };
 		CF14AD7222F11BA00097178E /* python-3.7.4-macosx10.9.pkg in Resources */ = {isa = PBXBuildFile; fileRef = CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */; };
 		CF1DCFBD22ED3A3300B513CF /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */; };
 		CF3620F622F3822D0080C28D /* mtoc.NEW in Resources */ = {isa = PBXBuildFile; fileRef = CF3620F222F3822D0080C28D /* mtoc.NEW */; };
@@ -17,6 +17,22 @@
 		CF8B54C622FA2EED005BE626 /* Sparkle.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = CF8B54C422FA2EED005BE626 /* Sparkle.framework.dSYM */; };
 		CF8B54C722FA2EF2005BE626 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF8B54C322FA2EED005BE626 /* Sparkle.framework */; };
 		CF8B54C822FA2EF2005BE626 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF8B54C322FA2EED005BE626 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CFAF280C2388529700323D6B /* alc.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF280B2388529700323D6B /* alc.command */; };
+		CFAF28102388533E00323D6B /* whatevergreen.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF280F2388533E00323D6B /* whatevergreen.command */; };
+		CFAF28122388538E00323D6B /* virtualsmc.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28112388538E00323D6B /* virtualsmc.command */; };
+		CFAF2814238853DB00323D6B /* cpufriend.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF2813238853DB00323D6B /* cpufriend.command */; };
+		CFAF28162388541900323D6B /* AirportBrcmFixup.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28152388541900323D6B /* AirportBrcmFixup.command */; };
+		CFAF28182388546000323D6B /* ATH9KFixup.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28172388546000323D6B /* ATH9KFixup.command */; };
+		CFAF281A2388548C00323D6B /* RTCMemoryFixup.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28192388548C00323D6B /* RTCMemoryFixup.command */; };
+		CFAF281C238854B000323D6B /* IntelMausiEthernet.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF281B238854B000323D6B /* IntelMausiEthernet.command */; };
+		CFAF281E238854D600323D6B /* AtherosE2200Ethernet.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF281D238854D600323D6B /* AtherosE2200Ethernet.command */; };
+		CFAF2820238854F900323D6B /* RealtekRTL8111.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF281F238854F900323D6B /* RealtekRTL8111.command */; };
+		CFAF28222388552400323D6B /* TSCAdjustReset.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28212388552400323D6B /* TSCAdjustReset.command */; };
+		CFAF28242388556F00323D6B /* opencore.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28232388556F00323D6B /* opencore.command */; };
+		CFAF28262388568E00323D6B /* applesupport.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28252388568E00323D6B /* applesupport.command */; };
+		CFAF28282388571D00323D6B /* opencoreshell.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF28272388571D00323D6B /* opencoreshell.command */; };
+		CFAF282A238857A400323D6B /* final.command in Resources */ = {isa = PBXBuildFile; fileRef = CFAF2829238857A400323D6B /* final.command */; };
+		CFDFE04E238846D800E36C0F /* lilu.command in Resources */ = {isa = PBXBuildFile; fileRef = CFDFE04D238846D800E36C0F /* lilu.command */; };
 		CFFC393A22ED390600A4CA25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC393922ED390600A4CA25 /* AppDelegate.swift */; };
 		CFFC393E22ED390800A4CA25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFC393D22ED390800A4CA25 /* Assets.xcassets */; };
 		CFFC394122ED390800A4CA25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFFC393F22ED390800A4CA25 /* Main.storyboard */; };
@@ -37,7 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = installrequiredtools.command; sourceTree = "<group>"; };
+		CF0C452922F0E19F00D5AF7D /* requiredtools.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = requiredtools.command; sourceTree = "<group>"; };
 		CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "python-3.7.4-macosx10.9.pkg"; sourceTree = "<group>"; };
 		CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		CF3620F222F3822D0080C28D /* mtoc.NEW */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mtoc.NEW; sourceTree = "<group>"; };
@@ -46,6 +62,22 @@
 		CF3620F522F3822D0080C28D /* mtoc */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mtoc; sourceTree = "<group>"; };
 		CF8B54C322FA2EED005BE626 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		CF8B54C422FA2EED005BE626 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		CFAF280B2388529700323D6B /* alc.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = alc.command; sourceTree = "<group>"; };
+		CFAF280F2388533E00323D6B /* whatevergreen.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = whatevergreen.command; sourceTree = "<group>"; };
+		CFAF28112388538E00323D6B /* virtualsmc.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = virtualsmc.command; sourceTree = "<group>"; };
+		CFAF2813238853DB00323D6B /* cpufriend.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = cpufriend.command; sourceTree = "<group>"; };
+		CFAF28152388541900323D6B /* AirportBrcmFixup.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = AirportBrcmFixup.command; sourceTree = "<group>"; };
+		CFAF28172388546000323D6B /* ATH9KFixup.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ATH9KFixup.command; sourceTree = "<group>"; };
+		CFAF28192388548C00323D6B /* RTCMemoryFixup.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = RTCMemoryFixup.command; sourceTree = "<group>"; };
+		CFAF281B238854B000323D6B /* IntelMausiEthernet.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = IntelMausiEthernet.command; sourceTree = "<group>"; };
+		CFAF281D238854D600323D6B /* AtherosE2200Ethernet.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = AtherosE2200Ethernet.command; sourceTree = "<group>"; };
+		CFAF281F238854F900323D6B /* RealtekRTL8111.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = RealtekRTL8111.command; sourceTree = "<group>"; };
+		CFAF28212388552400323D6B /* TSCAdjustReset.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TSCAdjustReset.command; sourceTree = "<group>"; };
+		CFAF28232388556F00323D6B /* opencore.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = opencore.command; sourceTree = "<group>"; };
+		CFAF28252388568E00323D6B /* applesupport.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = applesupport.command; sourceTree = "<group>"; };
+		CFAF28272388571D00323D6B /* opencoreshell.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = opencoreshell.command; sourceTree = "<group>"; };
+		CFAF2829238857A400323D6B /* final.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = final.command; sourceTree = "<group>"; };
+		CFDFE04D238846D800E36C0F /* lilu.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = lilu.command; sourceTree = "<group>"; };
 		CFFC393622ED390600A4CA25 /* OCBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFC393922ED390600A4CA25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFFC393D22ED390800A4CA25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,7 +129,23 @@
 			children = (
 				CFFC393922ED390600A4CA25 /* AppDelegate.swift */,
 				CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */,
-				CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */,
+				CF0C452922F0E19F00D5AF7D /* requiredtools.command */,
+				CFAF2829238857A400323D6B /* final.command */,
+				CFAF28272388571D00323D6B /* opencoreshell.command */,
+				CFAF28252388568E00323D6B /* applesupport.command */,
+				CFAF28232388556F00323D6B /* opencore.command */,
+				CFAF28212388552400323D6B /* TSCAdjustReset.command */,
+				CFAF281F238854F900323D6B /* RealtekRTL8111.command */,
+				CFAF281D238854D600323D6B /* AtherosE2200Ethernet.command */,
+				CFAF281B238854B000323D6B /* IntelMausiEthernet.command */,
+				CFAF28192388548C00323D6B /* RTCMemoryFixup.command */,
+				CFAF28172388546000323D6B /* ATH9KFixup.command */,
+				CFAF28152388541900323D6B /* AirportBrcmFixup.command */,
+				CFAF2813238853DB00323D6B /* cpufriend.command */,
+				CFAF28112388538E00323D6B /* virtualsmc.command */,
+				CFAF280B2388529700323D6B /* alc.command */,
+				CFAF280F2388533E00323D6B /* whatevergreen.command */,
+				CFDFE04D238846D800E36C0F /* lilu.command */,
 				CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */,
 				CF3620F522F3822D0080C28D /* mtoc */,
 				CF3620F222F3822D0080C28D /* mtoc.NEW */,
@@ -139,7 +187,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = Pavo;
 				TargetAttributes = {
 					CFFC393522ED390600A4CA25 = {
@@ -177,14 +225,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF3620F722F3822D0080C28D /* ndisasm in Resources */,
+				CFAF28242388556F00323D6B /* opencore.command in Resources */,
 				CFFC393E22ED390800A4CA25 /* Assets.xcassets in Resources */,
 				CFFC394122ED390800A4CA25 /* Main.storyboard in Resources */,
-				CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */,
+				CFAF28182388546000323D6B /* ATH9KFixup.command in Resources */,
+				CFAF2814238853DB00323D6B /* cpufriend.command in Resources */,
+				CFAF28122388538E00323D6B /* virtualsmc.command in Resources */,
+				CFAF281E238854D600323D6B /* AtherosE2200Ethernet.command in Resources */,
+				CFAF2820238854F900323D6B /* RealtekRTL8111.command in Resources */,
+				CFAF280C2388529700323D6B /* alc.command in Resources */,
+				CF0C453522F0E19F00D5AF7D /* requiredtools.command in Resources */,
+				CFAF28222388552400323D6B /* TSCAdjustReset.command in Resources */,
+				CFAF281C238854B000323D6B /* IntelMausiEthernet.command in Resources */,
 				CF3620F622F3822D0080C28D /* mtoc.NEW in Resources */,
 				CF14AD7222F11BA00097178E /* python-3.7.4-macosx10.9.pkg in Resources */,
 				CF3620F822F3822D0080C28D /* nasm in Resources */,
+				CFAF281A2388548C00323D6B /* RTCMemoryFixup.command in Resources */,
+				CFAF28102388533E00323D6B /* whatevergreen.command in Resources */,
 				CF3620F922F3822D0080C28D /* mtoc in Resources */,
+				CFAF28262388568E00323D6B /* applesupport.command in Resources */,
+				CFAF28282388571D00323D6B /* opencoreshell.command in Resources */,
 				CF8B54C622FA2EED005BE626 /* Sparkle.framework.dSYM in Resources */,
+				CFAF282A238857A400323D6B /* final.command in Resources */,
+				CFAF28162388541900323D6B /* AirportBrcmFixup.command in Resources */,
+				CFDFE04E238846D800E36C0F /* lilu.command in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,11 +399,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OCBuilder/OCBuilder.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.1;
 				DEVELOPMENT_TEAM = 5DG8PLV54H;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -364,11 +430,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OCBuilder/OCBuilder.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.1;
 				DEVELOPMENT_TEAM = 5DG8PLV54H;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
