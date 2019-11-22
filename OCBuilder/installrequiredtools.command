@@ -201,15 +201,11 @@ copyBuildProducts() {
   rm -rf *.zip
   cp -r "${BUILD_DIR}/Lilu/build/Release/Lilu.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/AppleALC/build/Release/AppleALC.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}"/VirtualSMC/build/Release/*.kext "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/VirtualSMC/build/Release/*.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/WhateverGreen/build/Release/WhateverGreen.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/CPUFriend/build/Release/CPUFriend.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/AirportBrcmFixup/build/Release/AirportBrcmFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/ATH9KFixup/build/Release/ATH9KFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/BT4LEContinuityFixup/build/Release/BT4LEContinuityFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/DiskArbitrationFixup/build/Release/DiskArbitrationFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/HibernationFixup/build/Release/HibernationFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/NoTouchID/build/Release/NoTouchID.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/RTCMemoryFixup/build/Release/RTCMemoryFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/IntelMausiEthernet/build/Release/IntelMausiEthernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/AtherosE2200Ethernet/build/Release/AtherosE2200Ethernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
@@ -305,46 +301,6 @@ cd "${BUILD_DIR}/ATH9KFixup"
 echo "Compiling the latest commited Release version of ATH9KFixup..."
 buildrelease
 echo "ATH9KFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning BT4LEContinuityFixup repo..."
-git clone https://github.com/acidanthera/BT4LEContinuityFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/BT4LEContinuityFixup"
-cd "${BUILD_DIR}/BT4LEContinuityFixup"
-echo "Compiling the latest commited Release version of BT4LEContinuityFixup..."
-buildrelease
-echo "BT4LEContinuityFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning DiskArbitrationFixup repo..."
-git clone https://github.com/Goldfish64/DiskArbitrationFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/DiskArbitrationFixup"
-cd "${BUILD_DIR}/DiskArbitrationFixup"
-echo "Compiling the latest commited Release version of DiskArbitrationFixup..."
-buildrelease
-echo "DiskArbitrationFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning HibernationFixup repo..."
-git clone https://github.com/acidanthera/HibernationFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/HibernationFixup"
-cd "${BUILD_DIR}/HibernationFixup"
-echo "Compiling the latest commited Release version of HibernationFixup..."
-buildrelease
-echo "HibernationFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning NoTouchID repo..."
-git clone https://github.com/al3xtjames/NoTouchID.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/NoTouchID"
-cd "${BUILD_DIR}/NoTouchID"
-echo "Compiling the latest commited Release version of NoTouchID..."
-buildrelease
-echo "NoTouchID Release Completed..."
 
 cd "${BUILD_DIR}"
 
