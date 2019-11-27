@@ -93,48 +93,29 @@ class TaskViewController: NSViewController {
     
     func runInstallRequiredToolsScript(_ arguments:[String]) {
         isRunning = true
-        let scriptsArray = [
-            "requiredtools",
-            "lilu",
-            "alc",
-            "whatevergreen",
-            "virtualsmc",
-            "cpufriend",
-            "AirportBrcmFixup",
-            "ATH9KFixup",
-            "RTCMemoryFixup",
-            "IntelMausiEthernet",
-            "AtherosE2200Ethernet",
-            "RealtekRTL8111",
-            "TSCAdjustReset",
-            "opencore",
-            "applesupport",
-            "opencoreshell",
-            "final"
-        ]
         let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         taskQueue.async {
-            for script in scriptsArray {
-                guard let path = Bundle.main.path(forResource: script, ofType:"command") else {
-                    print("Unable to locate \(script).command")
-                    return
-                }
-                self.buildTask = Process()
-                self.buildTask.launchPath = path
-                self.buildTask.arguments = arguments
-                self.buildTask.terminationHandler = {
-                    task in
-                    DispatchQueue.main.async(execute: {
-                        self.isRunning = false
-                        self.stopButton.isEnabled = false
-                        self.buildButton.isEnabled = true
-                        self.progressBar.isHidden = true
-                    })
-                }
-                self.captureStandardOutputAndRouteToTextView(self.buildTask)
-                self.buildTask.launch()
-                self.buildTask.waitUntilExit()
+            guard let path = Bundle.main.path(forResource: "installrequiredtools",ofType:"command") else {
+                print("Unable to locate installrequiredtools.command")
+                return
             }
+            self.buildTask = Process()
+            self.buildTask.launchPath = path
+            self.buildTask.arguments = arguments
+            self.buildTask.terminationHandler = {
+                task in
+                DispatchQueue.main.async(execute: {
+                    self.stopButton.isEnabled = false
+                    self.buildButton.isEnabled = true
+                    self.progressBar.isHidden = true
+                    self.progressBar.stopAnimation(self)
+                    self.progressBar.doubleValue = 0.0
+                    self.isRunning = false
+                })
+            }
+            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.buildTask.launch()
+            self.buildTask.waitUntilExit()
         }
     }
     
@@ -152,8 +133,7 @@ class TaskViewController: NSViewController {
                 self.outputText.string = nextOutput
                 let range = NSRange(location:nextOutput.count,length:0)
                 self.outputText.scrollRangeToVisible(range)
-                self.progressBar.increment(by: 1)
-                self.progressBar.stopAnimation(self)
+                self.progressBar.increment(by: 1.9)
             })
             self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
         }
