@@ -1,4 +1,4 @@
-# OCBuilder
+# OCBuilder [![Build Status](https://app.bitrise.io/app/fd170bb10455ce54/status.svg?token=0i53X6akChx4aBmvjCrhPQ&branch=master)](https://app.bitrise.io/app/fd170bb10455ce54)
 MacOS App to compile Opencore, common drivers and kexts that are used with OpenCore from source.
 
 ## This app will git clone from the following sources:
