@@ -439,10 +439,10 @@ if [ ! -d "${FINAL_DIR}" ]; then
   mkdir -p "${FINAL_DIR}"
   copyBuildProducts
 #  rm -rf "${BUILD_DIR}/"
-  open -a Safari https://pavo-im.github.io/Getting-Started-With-OpenCore/
+  open -a Safari https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/
 else
   rm -rf "${FINAL_DIR}"/*
   copyBuildProducts
 #  rm -rf "${BUILD_DIR}/"
-  open -a Safari https://pavo-im.github.io/Getting-Started-With-OpenCore/
+  open -a Safari https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/
 fi
