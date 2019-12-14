@@ -60,10 +60,6 @@ class TaskViewController: NSViewController {
                 print("Unable to locate mtoc")
                 return
             }
-            guard let pythonPath = Bundle.main.path(forResource: "python-3.7.4-macosx10.9", ofType: "pkg") else {
-                print("Unable to locate python")
-                return
-            }
             
             var arguments:[String] = []
             arguments.append(cloneLocation)
@@ -72,7 +68,6 @@ class TaskViewController: NSViewController {
             arguments.append(mtoc)
             arguments.append(nasmPath)
             arguments.append(mtocPath)
-            arguments.append(pythonPath)
             arguments.append(ndisasmPath)
             arguments.append(mtocNewPath)
             buildButton.isEnabled = false

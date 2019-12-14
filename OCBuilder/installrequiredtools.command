@@ -41,10 +41,6 @@ sudo () {
 BUILD_DIR="${1}/OCBuilder_Clone"
 FINAL_DIR="${2}/OCBuilder_Completed"
 
-sudo rm -rf /usr/local/bin/mtoc*
-sudo rm -rf /usr/local/bin/nasm*
-sudo rm -rf /usr/local/bin/ndisasm*
-
 if [ ! -x /usr/local/bin/nasm ]; then
   echo "Installing Required NASM tool"
   sudo cp "${5}" /usr/local/bin
@@ -63,12 +59,6 @@ fi
 if [ ! -x /usr/local/bin/mtoc.NEW ]; then
   echo "Install Required MTOC.NEW tool"
   sudo cp "${9}" /usr/local/bin
-fi
-
-if [ ! -x "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3" ]; then
-  echo "Installing Required Python 3.7..."
-  sudo cp "${7}" /tmp
-  sudo installer -pkg /tmp/*.pkg -target /
 fi
 
 buildrelease() {
@@ -364,7 +354,6 @@ opencorepkgclone
 ln -s .. OpenCorePkg
 make -C BaseTools >/dev/null || exit 1
 sleep 1
-export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
 export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null
 sleep 1
@@ -392,7 +381,6 @@ make -C BaseTools >/dev/null || exit 1
 sleep 1
 unset WORKSPACE
 unset EDK_TOOLS_PATH
-export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
 export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null || exit 1
 sleep 1
