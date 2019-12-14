@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */; };
-		CF14AD7222F11BA00097178E /* python-3.7.4-macosx10.9.pkg in Resources */ = {isa = PBXBuildFile; fileRef = CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */; };
 		CF1DCFBD22ED3A3300B513CF /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */; };
 		CF3620F622F3822D0080C28D /* mtoc.NEW in Resources */ = {isa = PBXBuildFile; fileRef = CF3620F222F3822D0080C28D /* mtoc.NEW */; };
 		CF3620F722F3822D0080C28D /* ndisasm in Resources */ = {isa = PBXBuildFile; fileRef = CF3620F322F3822D0080C28D /* ndisasm */; };
@@ -38,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = installrequiredtools.command; sourceTree = "<group>"; };
-		CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "python-3.7.4-macosx10.9.pkg"; sourceTree = "<group>"; };
 		CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		CF3620F222F3822D0080C28D /* mtoc.NEW */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mtoc.NEW; sourceTree = "<group>"; };
 		CF3620F322F3822D0080C28D /* ndisasm */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ndisasm; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				CFFC393922ED390600A4CA25 /* AppDelegate.swift */,
 				CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */,
 				CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */,
-				CF14AD7122F11BA00097178E /* python-3.7.4-macosx10.9.pkg */,
 				CF3620F522F3822D0080C28D /* mtoc */,
 				CF3620F222F3822D0080C28D /* mtoc.NEW */,
 				CF3620F422F3822D0080C28D /* nasm */,
@@ -181,7 +178,6 @@
 				CFFC394122ED390800A4CA25 /* Main.storyboard in Resources */,
 				CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */,
 				CF3620F622F3822D0080C28D /* mtoc.NEW in Resources */,
-				CF14AD7222F11BA00097178E /* python-3.7.4-macosx10.9.pkg in Resources */,
 				CF3620F822F3822D0080C28D /* nasm in Resources */,
 				CF3620F922F3822D0080C28D /* mtoc in Resources */,
 				CF8B54C622FA2EED005BE626 /* Sparkle.framework.dSYM in Resources */,
@@ -352,7 +348,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 3.7;
+				MARKETING_VERSION = 3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -381,7 +377,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 3.7;
+				MARKETING_VERSION = 3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
