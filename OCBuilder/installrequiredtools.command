@@ -358,6 +358,8 @@ echo "TSCAdjustReset Release Completed..."
 cd "${BUILD_DIR}"
 
 opencoreclone
+unset WORKSPACE
+unset PACKAGES_PATH
 cd "${BUILD_DIR}/OpenCorePkg"
 mkdir Binaries
 cd Binaries
@@ -369,9 +371,7 @@ opencorepkgclone
 ln -s .. OpenCorePkg
 make -C BaseTools >/dev/null || exit 1
 sleep 1
-unset WORKSPACE
-unset EDK_TOOLS_PATH
-unset PACKAGES_PATH
+export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 echo "Compiling the latest commited Release version of OpenCorePkg..."
@@ -383,6 +383,8 @@ opencorepackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 cd "${BUILD_DIR}"
 
 applesupportclone
+unset WORKSPACE
+unset PACKAGES_PATH
 cd "${BUILD_DIR}/AppleSupportPkg"
 mkdir Binaries >/dev/null || exit 1
 cd Binaries >/dev/null || exit 1
@@ -396,7 +398,7 @@ make -C BaseTools >/dev/null || exit 1
 sleep 1
 unset WORKSPACE
 unset EDK_TOOLS_PATH
-unset PACKAGES_PATH
+export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null || exit 1
 sleep 1
 echo "Compiling the latest commited Release version of AppleSupportPkg..."
@@ -408,6 +410,8 @@ applesupportpackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 cd "${BUILD_DIR}"
 
 opencoreshellclone
+unset WORKSPACE
+unset PACKAGES_PATH
 cd "${BUILD_DIR}/OpenCoreShell"
 mkdir Binaries >/dev/null || exit 1
 cd Binaries >/dev/null || exit 1
@@ -421,7 +425,7 @@ make -C BaseTools >/dev/null || exit 1
 sleep 1
 unset WORKSPACE
 unset EDK_TOOLS_PATH
-unset PACKAGES_PATH
+export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 for i in ../Patches/* ; do
