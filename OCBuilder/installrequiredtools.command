@@ -38,12 +38,15 @@ sudo () {
     /bin/echo $authPass | /usr/bin/sudo -S "$@"
 }
 
+unset WORKSPACE
+unset PACKAGES_PATH
+
 BUILD_DIR="${1}/OCBuilder_Clone"
 FINAL_DIR="${2}/OCBuilder_Completed"
 
 if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
-  echo "Missing or incompatible nasm!"
-  echo "Download the latest nasm from http://www.nasm.us/pub/nasm/releasebuilds/"
+  echo "Missing nasm!"
+  echo "Downloading the latest nasm from http://www.nasm.us/pub/nasm/releasebuilds/"
   pushd /tmp >/dev/null
   rm -rf nasm-mac64.zip
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/nasm-mac64.zip" || exit 1
@@ -51,12 +54,21 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
   rm -rf nasm-*
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/${nasmzip}" || exit 1
   unzip -q "${nasmzip}" nasm*/nasm nasm*/ndisasm || exit 1
-  sudo rm -rf /usr/local/bin || exit 1
-  sudo mkdir -p /usr/local/bin || exit 1
-  sudo mv nasm*/nasm /usr/local/bin/ || exit 1
-  sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
-  rm -rf "${nasmzip}" nasm-*
-  popd >/dev/null
+  if [ -d /usr/local/bin ]; then
+    echo "Existing /usr/local/bin directory!!"
+    sudo mv nasm*/nasm /usr/local/bin/ || exit 1
+    sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
+    rm -rf "${nasmzip}" nasm-*
+    popd >/dev/null
+  else
+    echo "No /usr/local/bin directory exist, making one!"
+    sudo mkdir -p /usr/local/bin || exit 1
+    sudo mv nasm*/nasm /usr/local/bin/ || exit 1
+    sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
+    rm -rf "${nasmzip}" nasm-*
+    popd >/dev/null
+  fi
+  echo "nasm installed"
 fi
 
 if [ "$(which mtoc.NEW)" == "" ] || [ "$(which mtoc)" == "" ]; then
@@ -66,7 +78,6 @@ if [ "$(which mtoc.NEW)" == "" ] || [ "$(which mtoc)" == "" ]; then
   rm -f mtoc mtoc-mac64.zip
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/mtoc-mac64.zip" || exit 1
   unzip -q mtoc-mac64.zip mtoc || exit 1
-  sudo mkdir -p /usr/local/bin || exit 1
   sudo cp mtoc /usr/local/bin/mtoc || exit 1
   sudo mv mtoc /usr/local/bin/mtoc.NEW || exit 1
   popd >/dev/null
@@ -352,8 +363,6 @@ echo "TSCAdjustReset Release Completed..."
 cd "${BUILD_DIR}"
 
 opencoreclone
-unset WORKSPACE
-unset PACKAGES_PATH
 cd "${BUILD_DIR}/OpenCorePkg"
 mkdir Binaries
 cd Binaries
@@ -365,7 +374,6 @@ opencorepkgclone
 ln -s .. OpenCorePkg
 make -C BaseTools >/dev/null || exit 1
 sleep 1
-export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 echo "Compiling the latest commited Release version of OpenCorePkg..."
@@ -377,8 +385,6 @@ opencorepackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 cd "${BUILD_DIR}"
 
 applesupportclone
-unset WORKSPACE
-unset PACKAGES_PATH
 cd "${BUILD_DIR}/AppleSupportPkg"
 mkdir Binaries >/dev/null || exit 1
 cd Binaries >/dev/null || exit 1
@@ -390,9 +396,6 @@ applesupportpkgclone
 ln -s .. AppleSupportPkg >/dev/null || exit 1
 make -C BaseTools >/dev/null || exit 1
 sleep 1
-unset WORKSPACE
-unset EDK_TOOLS_PATH
-export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null || exit 1
 sleep 1
 echo "Compiling the latest commited Release version of AppleSupportPkg..."
@@ -404,8 +407,6 @@ applesupportpackage "Binaries/RELEASE" "RELEASE" >/dev/null || exit 1
 cd "${BUILD_DIR}"
 
 opencoreshellclone
-unset WORKSPACE
-unset PACKAGES_PATH
 cd "${BUILD_DIR}/OpenCoreShell"
 mkdir Binaries >/dev/null || exit 1
 cd Binaries >/dev/null || exit 1
@@ -417,10 +418,6 @@ HASH=$(git rev-parse origin/master)
 ln -s .. AppleSupportPkg >/dev/null || exit 1
 make -C BaseTools >/dev/null || exit 1
 sleep 1
-unset WORKSPACE
-unset EDK_TOOLS_PATH
-export PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
-export NASM_PREFIX=/usr/local/bin/
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 for i in ../Patches/* ; do
