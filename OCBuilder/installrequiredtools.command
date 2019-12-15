@@ -38,9 +38,6 @@ sudo () {
     /bin/echo $authPass | /usr/bin/sudo -S "$@"
 }
 
-unset WORKSPACE
-unset PACKAGES_PATH
-
 BUILD_DIR="${1}/OCBuilder_Clone"
 FINAL_DIR="${2}/OCBuilder_Completed"
 
@@ -55,7 +52,6 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/${nasmzip}" || exit 1
   unzip -q "${nasmzip}" nasm*/nasm nasm*/ndisasm || exit 1
   if [ -d /usr/local/bin ]; then
-    echo "Existing /usr/local/bin directory!!"
     sudo mv nasm*/nasm /usr/local/bin/ || exit 1
     sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
     rm -rf "${nasmzip}" nasm-*
@@ -68,7 +64,6 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
     rm -rf "${nasmzip}" nasm-*
     popd >/dev/null
   fi
-  echo "nasm installed"
 fi
 
 if [ "$(which mtoc.NEW)" == "" ] || [ "$(which mtoc)" == "" ]; then
@@ -374,6 +369,9 @@ opencorepkgclone
 ln -s .. OpenCorePkg
 make -C BaseTools >/dev/null || exit 1
 sleep 1
+unset WORKSPACE
+unset EDK_TOOLS_PATH
+unset PACKAGES_PATH
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 echo "Compiling the latest commited Release version of OpenCorePkg..."
@@ -396,6 +394,9 @@ applesupportpkgclone
 ln -s .. AppleSupportPkg >/dev/null || exit 1
 make -C BaseTools >/dev/null || exit 1
 sleep 1
+unset WORKSPACE
+unset EDK_TOOLS_PATH
+unset PACKAGES_PATH
 source edksetup.sh --reconfig >/dev/null || exit 1
 sleep 1
 echo "Compiling the latest commited Release version of AppleSupportPkg..."
@@ -418,6 +419,9 @@ HASH=$(git rev-parse origin/master)
 ln -s .. AppleSupportPkg >/dev/null || exit 1
 make -C BaseTools >/dev/null || exit 1
 sleep 1
+unset WORKSPACE
+unset EDK_TOOLS_PATH
+unset PACKAGES_PATH
 source edksetup.sh --reconfig >/dev/null
 sleep 1
 for i in ../Patches/* ; do
