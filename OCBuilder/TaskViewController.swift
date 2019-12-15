@@ -42,34 +42,10 @@ class TaskViewController: NSViewController {
         if let repositoryURL = pathLocation.url {
             let cloneLocation = "/tmp"
             let finalLocation = repositoryURL.path
-            let nasm = "/usr/local/bin/nasm"
-            let mtoc = "/usr/local/bin/mtoc"
-            guard let nasmPath = Bundle.main.path(forResource: "nasm", ofType: "") else {
-                print("Unable to locate nasm")
-                return
-            }
-            guard let ndisasmPath = Bundle.main.path(forResource: "ndisasm", ofType: "") else {
-                print("Unable to locate nasm")
-                return
-            }
-            guard let mtocPath = Bundle.main.path(forResource: "mtoc", ofType: "") else {
-                print("Unable to locate mtoc")
-                return
-            }
-            guard let mtocNewPath = Bundle.main.path(forResource: "mtoc", ofType: "NEW") else {
-                print("Unable to locate mtoc")
-                return
-            }
             
             var arguments:[String] = []
             arguments.append(cloneLocation)
             arguments.append(finalLocation)
-            arguments.append(nasm)
-            arguments.append(mtoc)
-            arguments.append(nasmPath)
-            arguments.append(mtocPath)
-            arguments.append(ndisasmPath)
-            arguments.append(mtocNewPath)
             buildButton.isEnabled = false
             progressBar.startAnimation(self)
             runInstallRequiredToolsScript(arguments)

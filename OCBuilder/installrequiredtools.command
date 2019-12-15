@@ -51,6 +51,7 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
   rm -rf nasm-*
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/${nasmzip}" || exit 1
   unzip -q "${nasmzip}" nasm*/nasm nasm*/ndisasm || exit 1
+  sudo rm -rf /usr/local/bin || exit 1
   sudo mkdir -p /usr/local/bin || exit 1
   sudo mv nasm*/nasm /usr/local/bin/ || exit 1
   sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
