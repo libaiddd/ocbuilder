@@ -42,8 +42,6 @@ BUILD_DIR="${1}/OCBuilder_Clone"
 FINAL_DIR="${2}/OCBuilder_Completed"
 
 if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
-  echo "Missing nasm!"
-  echo "Downloading the latest nasm from http://www.nasm.us/pub/nasm/releasebuilds/"
   pushd /tmp >/dev/null
   rm -rf nasm-mac64.zip
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/nasm-mac64.zip" || exit 1
@@ -57,7 +55,6 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
     rm -rf "${nasmzip}" nasm-*
     popd >/dev/null
   else
-    echo "No /usr/local/bin directory exist, making one!"
     sudo mkdir -p /usr/local/bin || exit 1
     sudo mv nasm*/nasm /usr/local/bin/ || exit 1
     sudo mv nasm*/ndisasm /usr/local/bin/ || exit 1
@@ -67,8 +64,6 @@ if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
 fi
 
 if [ "$(which mtoc.NEW)" == "" ] || [ "$(which mtoc)" == "" ]; then
-  echo "Missing mtoc or mtoc.NEW!"
-  echo "To build mtoc follow: https://github.com/tianocore/tianocore.github.io/wiki/Xcode#mac-os-x-xcode"
   pushd /tmp >/dev/null
   rm -f mtoc mtoc-mac64.zip
   curl -OL "https://github.com/acidanthera/ocbuild/raw/master/external/mtoc-mac64.zip" || exit 1
