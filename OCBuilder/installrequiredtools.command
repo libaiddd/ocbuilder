@@ -105,7 +105,6 @@ applesupportpackage() {
   mkdir -p tmp/Drivers >/dev/null || exit 1
   mkdir -p tmp/Tools   || exit 1
   cp ApfsDriverLoader.efi tmp/Drivers/  || exit 1
-  cp FwRuntimeServices.efi tmp/Drivers/ || exit 1
   cp UsbKbDxe.efi tmp/Drivers/          || exit 1
   cp VBoxHfs.efi tmp/Drivers/           || exit 1
   cp VerifyMsrE2.efi tmp/Tools/         || exit 1
@@ -136,6 +135,7 @@ opencorepackage() {
   mkdir -p tmp/Utilities >/dev/null || exit 1
   cp OpenCore.efi tmp/EFI/OC/ >/dev/null || exit 1
   cp BOOTx64.efi tmp/EFI/BOOT/ >/dev/null || exit 1
+  cp FwRuntimeServices.efi tmp/EFI/OC/Drivers/ || exit 1
   cp "${selfdir}/Docs/Configuration.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Differences/Differences.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Sample.plist" tmp/Docs/ >/dev/null || exit 1
