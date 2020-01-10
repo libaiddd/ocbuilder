@@ -15,10 +15,10 @@ class TaskViewController: NSViewController {
     @IBOutlet var buildButton: NSButton!
     @IBOutlet var progressBar: NSProgressIndicator!
     @IBOutlet var stopButton: NSButton!
+    @IBOutlet weak var versionList: NSPopUpButton!
+    let versionArray = ["Debug", "Release"]
     
     override func viewDidLoad() {
-        
-        
         stopButton.isEnabled = false
         progressBar.isHidden = true
         super.viewDidLoad()
@@ -29,6 +29,8 @@ class TaskViewController: NSViewController {
             buildButton.isHidden = true
             pathLocation.isHidden = true
         }
+        versionList.removeAllItems()
+        versionList.addItems(withTitles: versionArray)
     }
     
     @objc dynamic var isRunning = false
@@ -42,16 +44,19 @@ class TaskViewController: NSViewController {
         if let repositoryURL = pathLocation.url {
             let cloneLocation = "/tmp"
             let finalLocation = repositoryURL.path
-            
             var arguments:[String] = []
             arguments.append(cloneLocation)
             arguments.append(finalLocation)
             buildButton.isEnabled = false
             progressBar.startAnimation(self)
-            runInstallRequiredToolsScript(arguments)
+            if versionList.titleOfSelectedItem == "Debug" {
+                runDebugScript(arguments)
+            }
+            if versionList.titleOfSelectedItem == "Release" {
+                runReleaseScript(arguments)
+            }
         }
     }
-    
     
     @IBAction func stopTask(_ sender: Any) {
         stopButton.isEnabled = false
@@ -62,12 +67,40 @@ class TaskViewController: NSViewController {
         }
     }
     
-    func runInstallRequiredToolsScript(_ arguments:[String]) {
+    func runReleaseScript(_ arguments:[String]) {
         isRunning = true
         let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         taskQueue.async {
-            guard let path = Bundle.main.path(forResource: "installrequiredtools",ofType:"command") else {
-                print("Unable to locate installrequiredtools.command")
+            guard let path = Bundle.main.path(forResource: "release",ofType:"command") else {
+                print("Unable to locate release.command")
+                return
+            }
+            self.buildTask = Process()
+            self.buildTask.launchPath = path
+            self.buildTask.arguments = arguments
+            self.buildTask.terminationHandler = {
+                task in
+                DispatchQueue.main.async(execute: {
+                    self.stopButton.isEnabled = false
+                    self.buildButton.isEnabled = true
+                    self.progressBar.isHidden = true
+                    self.progressBar.stopAnimation(self)
+                    self.progressBar.doubleValue = 0.0
+                    self.isRunning = false
+                })
+            }
+            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.buildTask.launch()
+            self.buildTask.waitUntilExit()
+        }
+    }
+    
+    func runDebugScript(_ arguments:[String]) {
+        isRunning = true
+        let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        taskQueue.async {
+            guard let path = Bundle.main.path(forResource: "debug",ofType:"command") else {
+                print("Unable to locate release.command")
                 return
             }
             self.buildTask = Process()
