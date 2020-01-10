@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */; };
+		CF0C453522F0E19F00D5AF7D /* release.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* release.command */; };
+		CF1D3F4823C9253B00CB97A8 /* debug.command in Resources */ = {isa = PBXBuildFile; fileRef = CF1D3F4723C9253B00CB97A8 /* debug.command */; };
 		CF1DCFBD22ED3A3300B513CF /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */; };
 		CF8B54C622FA2EED005BE626 /* Sparkle.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = CF8B54C422FA2EED005BE626 /* Sparkle.framework.dSYM */; };
 		CF8B54C722FA2EF2005BE626 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF8B54C322FA2EED005BE626 /* Sparkle.framework */; };
@@ -32,7 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = installrequiredtools.command; sourceTree = "<group>"; };
+		CF0C452922F0E19F00D5AF7D /* release.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = release.command; sourceTree = "<group>"; };
+		CF1D3F4723C9253B00CB97A8 /* debug.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = debug.command; sourceTree = "<group>"; };
 		CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		CF8B54C322FA2EED005BE626 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		CF8B54C422FA2EED005BE626 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
@@ -87,7 +89,8 @@
 			children = (
 				CFFC393922ED390600A4CA25 /* AppDelegate.swift */,
 				CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */,
-				CF0C452922F0E19F00D5AF7D /* installrequiredtools.command */,
+				CF0C452922F0E19F00D5AF7D /* release.command */,
+				CF1D3F4723C9253B00CB97A8 /* debug.command */,
 				CFFC393D22ED390800A4CA25 /* Assets.xcassets */,
 				CFFC393F22ED390800A4CA25 /* Main.storyboard */,
 				CFFC394222ED390800A4CA25 /* Info.plist */,
@@ -162,8 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFFC393E22ED390800A4CA25 /* Assets.xcassets in Resources */,
+				CF1D3F4823C9253B00CB97A8 /* debug.command in Resources */,
 				CFFC394122ED390800A4CA25 /* Main.storyboard in Resources */,
-				CF0C453522F0E19F00D5AF7D /* installrequiredtools.command in Resources */,
+				CF0C453522F0E19F00D5AF7D /* release.command in Resources */,
 				CF8B54C622FA2EED005BE626 /* Sparkle.framework.dSYM in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,7 +336,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 4.7;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -361,7 +365,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 4.7;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
