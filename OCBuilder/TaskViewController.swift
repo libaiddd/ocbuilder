@@ -17,6 +17,7 @@ class TaskViewController: NSViewController {
     @IBOutlet var stopButton: NSButton!
     @IBOutlet weak var versionList: NSPopUpButton!
     let versionArray = ["Debug", "Release"]
+    @IBOutlet weak var withKextsChecked: NSButton!
     
     override func viewDidLoad() {
         stopButton.isEnabled = false
@@ -50,10 +51,18 @@ class TaskViewController: NSViewController {
             buildButton.isEnabled = false
             progressBar.startAnimation(self)
             if versionList.titleOfSelectedItem == "Debug" {
-                runDebugScript(arguments)
+                if withKextsChecked.state == NSControl.StateValue.on {
+                    runDebugScript(arguments)
+                } else {
+                    runDebugWithoutKextScript(arguments)
+                }
             }
             if versionList.titleOfSelectedItem == "Release" {
-                runReleaseScript(arguments)
+                if withKextsChecked.state == NSControl.StateValue.on {
+                    runReleaseScript(arguments)
+                } else {
+                    runReleaseWithoutKextScript(arguments)
+                }
             }
         }
     }
@@ -95,12 +104,68 @@ class TaskViewController: NSViewController {
         }
     }
     
+    func runReleaseWithoutKextScript(_ arguments:[String]) {
+        isRunning = true
+        let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        taskQueue.async {
+            guard let path = Bundle.main.path(forResource: "release_without_kexts",ofType:"command") else {
+                print("Unable to locate release_without_kexts.command")
+                return
+            }
+            self.buildTask = Process()
+            self.buildTask.launchPath = path
+            self.buildTask.arguments = arguments
+            self.buildTask.terminationHandler = {
+                task in
+                DispatchQueue.main.async(execute: {
+                    self.stopButton.isEnabled = false
+                    self.buildButton.isEnabled = true
+                    self.progressBar.isHidden = true
+                    self.progressBar.stopAnimation(self)
+                    self.progressBar.doubleValue = 0.0
+                    self.isRunning = false
+                })
+            }
+            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.buildTask.launch()
+            self.buildTask.waitUntilExit()
+        }
+    }
+    
     func runDebugScript(_ arguments:[String]) {
         isRunning = true
         let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
         taskQueue.async {
             guard let path = Bundle.main.path(forResource: "debug",ofType:"command") else {
                 print("Unable to locate release.command")
+                return
+            }
+            self.buildTask = Process()
+            self.buildTask.launchPath = path
+            self.buildTask.arguments = arguments
+            self.buildTask.terminationHandler = {
+                task in
+                DispatchQueue.main.async(execute: {
+                    self.stopButton.isEnabled = false
+                    self.buildButton.isEnabled = true
+                    self.progressBar.isHidden = true
+                    self.progressBar.stopAnimation(self)
+                    self.progressBar.doubleValue = 0.0
+                    self.isRunning = false
+                })
+            }
+            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.buildTask.launch()
+            self.buildTask.waitUntilExit()
+        }
+    }
+    
+    func runDebugWithoutKextScript(_ arguments:[String]) {
+        isRunning = true
+        let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        taskQueue.async {
+            guard let path = Bundle.main.path(forResource: "debug_without_kexts",ofType:"command") else {
+                print("Unable to locate debug_without_kexts.command")
                 return
             }
             self.buildTask = Process()

@@ -802,6 +802,13 @@
                                     <action selector="startTask:" target="NNW-f1-Qqb" id="d3q-9y-YTa"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HDL-eS-nGL">
+                                <rect key="frame" x="221" y="580" width="94" height="18"/>
+                                <buttonCell key="cell" type="check" title="With Kexts?" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zaT-86-saK">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="qmd-Ur-GHE" firstAttribute="top" secondItem="efZ-vh-5Y3" secondAttribute="bottom" constant="20" id="0Do-6f-F1Q"/>
@@ -811,6 +818,7 @@
                             <constraint firstAttribute="trailing" secondItem="7MA-Tb-gM7" secondAttribute="trailing" constant="20" id="7E2-ix-X15"/>
                             <constraint firstAttribute="trailing" secondItem="4eK-aF-fvS" secondAttribute="trailing" constant="20" id="99f-ub-c4V"/>
                             <constraint firstItem="NAi-jy-jeW" firstAttribute="top" secondItem="eZs-lk-K1D" secondAttribute="top" constant="20" id="BIt-3Q-0Xl"/>
+                            <constraint firstItem="HDL-eS-nGL" firstAttribute="top" secondItem="eZs-lk-K1D" secondAttribute="top" constant="20" id="BTD-Hc-6hI"/>
                             <constraint firstItem="jtV-1f-CML" firstAttribute="leading" secondItem="eZs-lk-K1D" secondAttribute="leading" constant="20" id="CFU-K0-i0V"/>
                             <constraint firstItem="7MA-Tb-gM7" firstAttribute="leading" secondItem="eZs-lk-K1D" secondAttribute="leading" constant="20" id="DwX-n4-8Fi"/>
                             <constraint firstItem="URX-YK-IZV" firstAttribute="top" secondItem="qmd-Ur-GHE" secondAttribute="bottom" constant="30" id="MHv-Tm-YhM"/>
@@ -825,6 +833,7 @@
                             <constraint firstItem="4eK-aF-fvS" firstAttribute="top" secondItem="NAi-jy-jeW" secondAttribute="bottom" constant="20" id="gCD-ly-ehu"/>
                             <constraint firstItem="7MA-Tb-gM7" firstAttribute="top" secondItem="GNb-Zw-qeh" secondAttribute="bottom" constant="20" id="kMi-90-bG1"/>
                             <constraint firstItem="4eK-aF-fvS" firstAttribute="leading" secondItem="eZs-lk-K1D" secondAttribute="leading" constant="20" id="luP-nW-6lq"/>
+                            <constraint firstItem="HDL-eS-nGL" firstAttribute="leading" secondItem="NAi-jy-jeW" secondAttribute="trailing" constant="20" id="t5L-8f-yPv"/>
                             <constraint firstAttribute="bottom" secondItem="URX-YK-IZV" secondAttribute="bottom" constant="20" id="zSB-jI-dPD"/>
                         </constraints>
                     </view>
@@ -835,6 +844,7 @@
                         <outlet property="progressBar" destination="qmd-Ur-GHE" id="60c-n9-to0"/>
                         <outlet property="stopButton" destination="URX-YK-IZV" id="595-JA-qZ9"/>
                         <outlet property="versionList" destination="NAi-jy-jeW" id="zUA-tO-aeO"/>
+                        <outlet property="withKextsChecked" destination="HDL-eS-nGL" id="etN-Jt-aSZ"/>
                     </connections>
                 </viewController>
                 <customObject id="bYY-Af-pVN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

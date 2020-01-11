@@ -39,7 +39,7 @@ sudo () {
 }
 
 BUILD_DIR="${1}/OCBuilder_Clone"
-FINAL_DIR="${2}/Release_OCBuilder_Completed"
+FINAL_DIR="${2}/Release_With_Kext_OCBuilder_Completed"
 
 if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
   pushd /tmp >/dev/null
