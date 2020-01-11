@@ -103,7 +103,6 @@ applesupportpackage() {
   cp ApfsDriverLoader.efi tmp/Drivers/  || exit 1
   cp UsbKbDxe.efi tmp/Drivers/          || exit 1
   cp VBoxHfs.efi tmp/Drivers/           || exit 1
-  cp VerifyMsrE2.efi tmp/Tools/         || exit 1
   pushd tmp >/dev/null || exit 1
   zip -qry -FS ../"AppleSupport-${ver}-${2}.zip" * >/dev/null || exit 1
   popd >/dev/null || exit 1
@@ -132,6 +131,8 @@ opencorepackage() {
   cp OpenCore.efi tmp/EFI/OC/ >/dev/null || exit 1
   cp BOOTx64.efi tmp/EFI/BOOT/ >/dev/null || exit 1
   cp FwRuntimeServices.efi tmp/EFI/OC/Drivers/ || exit 1
+  cp CleanNvram.efi tmp/EFI/OC/Tools/ || exit 1
+  cp VerifyMsrE2.efi tmp/EFI/OC/Tools/ || exit 1
   cp "${selfdir}/Docs/Configuration.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Differences/Differences.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Sample.plist" tmp/Docs/ >/dev/null || exit 1
@@ -215,7 +216,6 @@ copyBuildProducts() {
   rm -rf "${BUILD_DIR}"/AppleSupportPkg/Binaries/DEBUG/Tools
   unzip *.zip  >/dev/null || exit 1
   cp -r "${BUILD_DIR}"/AppleSupportPkg/Binaries/DEBUG/Drivers/*.efi "${FINAL_DIR}"/EFI/OC/Drivers
-  cp -r "${BUILD_DIR}"/AppleSupportPkg/Binaries/DEBUG/Tools/*.efi "${FINAL_DIR}"/EFI/OC/Tools
   echo "All Done!..."
 }
 
