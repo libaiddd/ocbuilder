@@ -101,7 +101,6 @@ applesupportpackage() {
   mkdir -p tmp/Drivers >/dev/null || exit 1
   mkdir -p tmp/Tools   || exit 1
   cp ApfsDriverLoader.efi tmp/Drivers/  || exit 1
-  cp UsbKbDxe.efi tmp/Drivers/          || exit 1
   cp VBoxHfs.efi tmp/Drivers/           || exit 1
   pushd tmp >/dev/null || exit 1
   zip -qry -FS ../"AppleSupport-${ver}-${2}.zip" * >/dev/null || exit 1
@@ -130,6 +129,7 @@ opencorepackage() {
   mkdir -p tmp/Utilities >/dev/null || exit 1
   cp OpenCore.efi tmp/EFI/OC/ >/dev/null || exit 1
   cp BOOTx64.efi tmp/EFI/BOOT/ >/dev/null || exit 1
+  cp AppleUsbKbDxe.efi tmp/EFI/OC/Drivers/ || exit 1
   cp FwRuntimeServices.efi tmp/EFI/OC/Drivers/ || exit 1
   cp CleanNvram.efi tmp/EFI/OC/Tools/ || exit 1
   cp VerifyMsrE2.efi tmp/EFI/OC/Tools/ || exit 1
