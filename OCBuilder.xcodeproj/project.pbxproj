@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF0C453522F0E19F00D5AF7D /* release.command in Resources */ = {isa = PBXBuildFile; fileRef = CF0C452922F0E19F00D5AF7D /* release.command */; };
+		CF16433823CD462D00D02E15 /* OC.png in Resources */ = {isa = PBXBuildFile; fileRef = CF16433723CD462D00D02E15 /* OC.png */; };
 		CF1D3F4823C9253B00CB97A8 /* debug.command in Resources */ = {isa = PBXBuildFile; fileRef = CF1D3F4723C9253B00CB97A8 /* debug.command */; };
 		CF1DCFBD22ED3A3300B513CF /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */; };
 		CF5FCF4023CA60AC00542BB5 /* release_without_kexts.command in Resources */ = {isa = PBXBuildFile; fileRef = CF5FCF3F23CA60AC00542BB5 /* release_without_kexts.command */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		CF0C452922F0E19F00D5AF7D /* release.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = release.command; sourceTree = "<group>"; };
+		CF16433723CD462D00D02E15 /* OC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OC.png; sourceTree = "<group>"; };
 		CF1D3F4723C9253B00CB97A8 /* debug.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = debug.command; sourceTree = "<group>"; };
 		CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		CF5FCF3F23CA60AC00542BB5 /* release_without_kexts.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = release_without_kexts.command; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		CFFC393822ED390600A4CA25 /* OCBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				CF16433723CD462D00D02E15 /* OC.png */,
 				CFFC393922ED390600A4CA25 /* AppDelegate.swift */,
 				CF1DCFBC22ED3A3300B513CF /* TaskViewController.swift */,
 				CF5FCF3F23CA60AC00542BB5 /* release_without_kexts.command */,
@@ -173,6 +176,7 @@
 				CF5FCF4023CA60AC00542BB5 /* release_without_kexts.command in Resources */,
 				CF5FCF4223CA60C800542BB5 /* debug_without_kexts.command in Resources */,
 				CFFC393E22ED390800A4CA25 /* Assets.xcassets in Resources */,
+				CF16433823CD462D00D02E15 /* OC.png in Resources */,
 				CF1D3F4823C9253B00CB97A8 /* debug.command in Resources */,
 				CFFC394122ED390800A4CA25 /* Main.storyboard in Resources */,
 				CF0C453522F0E19F00D5AF7D /* release.command in Resources */,
@@ -344,7 +348,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 5.5;
+				MARKETING_VERSION = 5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -373,7 +377,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 5.5;
+				MARKETING_VERSION = 5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = OCBuilder.OCBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
