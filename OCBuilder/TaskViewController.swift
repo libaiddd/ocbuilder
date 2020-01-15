@@ -98,7 +98,7 @@ class TaskViewController: NSViewController {
                     self.isRunning = false
                 })
             }
-            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.captureStandardOutputAndRouteToTextViewReleaseWithKext(self.buildTask)
             self.buildTask.launch()
             self.buildTask.waitUntilExit()
         }
@@ -126,7 +126,7 @@ class TaskViewController: NSViewController {
                     self.isRunning = false
                 })
             }
-            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.captureStandardOutputAndRouteToTextViewonReleaseWithoutKext(self.buildTask)
             self.buildTask.launch()
             self.buildTask.waitUntilExit()
         }
@@ -154,7 +154,7 @@ class TaskViewController: NSViewController {
                     self.isRunning = false
                 })
             }
-            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.captureStandardOutputAndRouteToTextViewDebugWithKext(self.buildTask)
             self.buildTask.launch()
             self.buildTask.waitUntilExit()
         }
@@ -182,13 +182,73 @@ class TaskViewController: NSViewController {
                     self.isRunning = false
                 })
             }
-            self.captureStandardOutputAndRouteToTextView(self.buildTask)
+            self.captureStandardOutputAndRouteToTextViewonDebugWithoutKext(self.buildTask)
             self.buildTask.launch()
             self.buildTask.waitUntilExit()
         }
     }
     
-    func captureStandardOutputAndRouteToTextView(_ task:Process) {
+    func captureStandardOutputAndRouteToTextViewonReleaseWithoutKext(_ task:Process) {
+        outputPipe = Pipe()
+        task.standardOutput = outputPipe
+        outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outputPipe.fileHandleForReading , queue: nil) {
+            notification in
+            let output = self.outputPipe.fileHandleForReading.availableData
+            let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+            DispatchQueue.main.async(execute: {
+                let previousOutput = self.outputText.string
+                let nextOutput = previousOutput + "\n" + outputString
+                self.outputText.string = nextOutput
+                let range = NSRange(location:nextOutput.count,length:0)
+                self.outputText.scrollRangeToVisible(range)
+                self.progressBar.increment(by: 8.3)
+            })
+            self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        }
+    }
+    
+    func captureStandardOutputAndRouteToTextViewonDebugWithoutKext(_ task:Process) {
+        outputPipe = Pipe()
+        task.standardOutput = outputPipe
+        outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outputPipe.fileHandleForReading , queue: nil) {
+            notification in
+            let output = self.outputPipe.fileHandleForReading.availableData
+            let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+            DispatchQueue.main.async(execute: {
+                let previousOutput = self.outputText.string
+                let nextOutput = previousOutput + "\n" + outputString
+                self.outputText.string = nextOutput
+                let range = NSRange(location:nextOutput.count,length:0)
+                self.outputText.scrollRangeToVisible(range)
+                self.progressBar.increment(by: 7.6)
+            })
+            self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        }
+    }
+    
+    func captureStandardOutputAndRouteToTextViewReleaseWithKext(_ task:Process) {
+        outputPipe = Pipe()
+        task.standardOutput = outputPipe
+        outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outputPipe.fileHandleForReading , queue: nil) {
+            notification in
+            let output = self.outputPipe.fileHandleForReading.availableData
+            let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+            DispatchQueue.main.async(execute: {
+                let previousOutput = self.outputText.string
+                let nextOutput = previousOutput + "\n" + outputString
+                self.outputText.string = nextOutput
+                let range = NSRange(location:nextOutput.count,length:0)
+                self.outputText.scrollRangeToVisible(range)
+                self.progressBar.increment(by: 1.9)
+            })
+            self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        }
+    }
+    
+    func captureStandardOutputAndRouteToTextViewDebugWithKext(_ task:Process) {
         outputPipe = Pipe()
         task.standardOutput = outputPipe
         outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
