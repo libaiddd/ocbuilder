@@ -210,6 +210,7 @@ copyBuildProducts() {
   cp -r "${BUILD_DIR}/WhateverGreen/build/Release/WhateverGreen.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/CPUFriend/build/Release/CPUFriend.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/AirportBrcmFixup/build/Release/AirportBrcmFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
+  cp -r "${BUILD_DIR}/MacProMemoryNotificationDisabler/build/Release/MacProMemoryNotificationDisabler.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/ATH9KFixup/build/Release/ATH9KFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/RTCMemoryFixup/build/Release/RTCMemoryFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/IntelMausiEthernet/build/Release/IntelMausiEthernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
@@ -294,6 +295,16 @@ cd "${BUILD_DIR}/AirportBrcmFixup"
 echo "Compiling the latest commited Release version of AirportBrcmFixup..."
 buildrelease
 echo "AirportBrcmFixup Release Completed..."
+
+cd "${BUILD_DIR}"
+
+echo "Cloning MacProMemoryNotificationDisabler repo..."
+git clone https://github.com/IOIIIO/MacProMemoryNotificationDisabler.git >/dev/null || exit 1
+cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/MacProMemoryNotificationDisabler"
+cd "${BUILD_DIR}/MacProMemoryNotificationDisabler"
+echo "Compiling the latest commited Release version of MacProMemoryNotificationDisabler..."
+buildrelease
+echo "MacProMemoryNotificationDisabler Release Completed..."
 
 cd "${BUILD_DIR}"
 
