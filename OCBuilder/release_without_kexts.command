@@ -39,7 +39,7 @@ sudo () {
 }
 
 BUILD_DIR="${1}/OCBuilder_Clone"
-FINAL_DIR="${2}/OCBuilder_Completed"
+FINAL_DIR="${2}/Release_Without_Kext_OCBuilder_Completed"
 
 if [ "$(nasm -v)" = "" ] || [ "$(nasm -v | grep Apple)" != "" ]; then
   pushd /tmp >/dev/null
@@ -73,14 +73,6 @@ if [ "$(which mtoc.NEW)" == "" ] || [ "$(which mtoc)" == "" ]; then
   popd >/dev/null
 fi
 
-buildrelease() {
-  xcodebuild -configuration Release  >/dev/null || exit 1
-}
-
-builddebug() {
-  xcodebuild -configuration Debug  >/dev/null || exit 1
-}
-
 ocshellpackage() {
   pushd "$1" >/dev/null || exit 1
   rm -rf tmp >/dev/null || exit 1
@@ -105,9 +97,7 @@ applesupportpackage() {
   mkdir -p tmp/Drivers >/dev/null || exit 1
   mkdir -p tmp/Tools   || exit 1
   cp ApfsDriverLoader.efi tmp/Drivers/  || exit 1
-  cp UsbKbDxe.efi tmp/Drivers/          || exit 1
   cp VBoxHfs.efi tmp/Drivers/           || exit 1
-  cp VerifyMsrE2.efi tmp/Tools/         || exit 1
   pushd tmp >/dev/null || exit 1
   zip -qry -FS ../"AppleSupport-${ver}-${2}.zip" * >/dev/null || exit 1
   popd >/dev/null || exit 1
@@ -135,7 +125,12 @@ opencorepackage() {
   mkdir -p tmp/Utilities >/dev/null || exit 1
   cp OpenCore.efi tmp/EFI/OC/ >/dev/null || exit 1
   cp BOOTx64.efi tmp/EFI/BOOT/ >/dev/null || exit 1
+  cp AppleUsbKbDxe.efi tmp/EFI/OC/Drivers/ || exit 1
   cp FwRuntimeServices.efi tmp/EFI/OC/Drivers/ || exit 1
+  cp NvmExpressDxe.efi tmp/EFI/OC/Drivers/ || exit 1
+  cp XhciDxe.efi tmp/EFI/OC/Drivers/ || exit 1
+  cp CleanNvram.efi tmp/EFI/OC/Tools/ || exit 1
+  cp VerifyMsrE2.efi tmp/EFI/OC/Tools/ || exit 1
   cp "${selfdir}/Docs/Configuration.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Differences/Differences.pdf" tmp/Docs/ >/dev/null || exit 1
   cp "${selfdir}/Docs/Sample.plist" tmp/Docs/ >/dev/null || exit 1
@@ -201,25 +196,12 @@ copyBuildProducts() {
   cd "${FINAL_DIR}/"
   unzip *.zip  >/dev/null || exit 1
   rm -rf *.zip
-  cp -r "${BUILD_DIR}/Lilu/build/Release/Lilu.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/AppleALC/build/Release/AppleALC.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}"/VirtualSMC/build/Release/*.kext "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/WhateverGreen/build/Release/WhateverGreen.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/CPUFriend/build/Release/CPUFriend.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/AirportBrcmFixup/build/Release/AirportBrcmFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/ATH9KFixup/build/Release/ATH9KFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/RTCMemoryFixup/build/Release/RTCMemoryFixup.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/IntelMausiEthernet/build/Release/IntelMausiEthernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/AtherosE2200Ethernet/build/Release/AtherosE2200Ethernet.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/TSCAdjustReset/build/Release/TSCAdjustReset.kext" "${FINAL_DIR}"/EFI/OC/Kexts
-  cp -r "${BUILD_DIR}/RTL8111_driver_for_OS_X/build/Release/RealtekRTL8111.kext" "${FINAL_DIR}"/EFI/OC/Kexts
   cp -r "${BUILD_DIR}/OpenCoreShell/Binaries/RELEASE/Shell_EA4BB293-2D7F-4456-A681-1F22F42CD0BC.efi" "${FINAL_DIR}"/EFI/OC/Tools/Shell.efi
   cd "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE
   rm -rf "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE/Drivers
   rm -rf "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE/Tools
   unzip *.zip  >/dev/null || exit 1
   cp -r "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE/Drivers/*.efi "${FINAL_DIR}"/EFI/OC/Drivers
-  cp -r "${BUILD_DIR}"/AppleSupportPkg/Binaries/RELEASE/Tools/*.efi "${FINAL_DIR}"/EFI/OC/Tools
   echo "All Done!..."
 }
 
@@ -229,125 +211,6 @@ else
   rm -rf "${BUILD_DIR}/"
   mkdir -p "${BUILD_DIR}"
 fi
-
-cd "${BUILD_DIR}"
-
-echo "Cloning Lilu repo..."
-git clone https://github.com/acidanthera/Lilu.git >/dev/null || exit 1
-cd "${BUILD_DIR}/Lilu"
-echo "Compiling the latest commited Debug version of Lilu..."
-builddebug
-echo "Lilu Debug Completed..."
-sleep 1
-echo "Compiling the latest commited Release version of Lilu..."
-buildrelease
-echo "Lilu Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning AppleALC repo..."
-git clone https://github.com/acidanthera/AppleALC.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AppleALC"
-cd "${BUILD_DIR}/AppleALC"
-echo "Compiling the latest commited Release version of AppleALC..."
-buildrelease
-echo "AppleALC Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning WhateverGreen repo..."
-git clone https://github.com/acidanthera/WhateverGreen.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/WhateverGreen"
-cd "${BUILD_DIR}/WhateverGreen"
-echo "Compiling the latest commited Release version of WhateverGreen..."
-buildrelease
-echo "WhateverGreen Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning VirtualSMC repo..."
-git clone https://github.com/acidanthera/VirtualSMC.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/VirtualSMC"
-cd "${BUILD_DIR}/VirtualSMC"
-echo "Compiling the latest commited Release version of VirtualSMC..."
-buildrelease
-echo "VirtualSMC Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning CPUFriend repo..."
-git clone https://github.com/acidanthera/CPUFriend.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/CPUFriend"
-cd "${BUILD_DIR}/CPUFriend"
-echo "Compiling the latest commited Release version of CPUFriend..."
-buildrelease
-echo "CPUFriend Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning AirportBrcmFixup repo..."
-git clone https://github.com/acidanthera/AirportBrcmFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/AirportBrcmFixup"
-cd "${BUILD_DIR}/AirportBrcmFixup"
-echo "Compiling the latest commited Release version of AirportBrcmFixup..."
-buildrelease
-echo "AirportBrcmFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning ATH9KFixup repo..."
-git clone https://github.com/chunnann/ATH9KFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/ATH9KFixup"
-cd "${BUILD_DIR}/ATH9KFixup"
-echo "Compiling the latest commited Release version of ATH9KFixup..."
-buildrelease
-echo "ATH9KFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning RTCMemoryFixup repo..."
-git clone https://github.com/acidanthera/RTCMemoryFixup.git >/dev/null || exit 1
-cp -r "${BUILD_DIR}/Lilu/build/Debug/Lilu.kext" "${BUILD_DIR}/RTCMemoryFixup"
-cd "${BUILD_DIR}/RTCMemoryFixup"
-echo "Compiling the latest commited Release version of RTCMemoryFixup..."
-buildrelease
-echo "RTCMemoryFixup Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning IntelMausiEthernet repo..."
-git clone https://github.com/Mieze/IntelMausiEthernet.git >/dev/null || exit 1
-cd "${BUILD_DIR}/IntelMausiEthernet"
-echo "Compiling the latest commited Release version of IntelMausiEthernet..."
-buildrelease
-echo "IntelMausiEthernet Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning AtherosE2200Ethernet repo..."
-git clone https://github.com/Mieze/AtherosE2200Ethernet.git >/dev/null || exit 1
-cd "${BUILD_DIR}/AtherosE2200Ethernet"
-echo "Compiling the latest commited Release version of AtherosE2200Ethernet..."
-buildrelease
-echo "AtherosE2200Ethernet Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning RealtekRTL8111 repo..."
-git clone https://github.com/Mieze/RTL8111_driver_for_OS_X.git >/dev/null || exit 1
-cd "${BUILD_DIR}/RTL8111_driver_for_OS_X"
-echo "Compiling the latest commited Release version of RealtekRTL8111..."
-buildrelease
-echo "RealtekRTL8111 Release Completed..."
-
-cd "${BUILD_DIR}"
-
-echo "Cloning TSCAdjustReset repo..."
-git clone https://github.com/interferenc/TSCAdjustReset.git >/dev/null || exit 1
-cd "${BUILD_DIR}/TSCAdjustReset"
-echo "Compiling the latest commited Release version of TSCAdjustReset..."
-buildrelease
-echo "TSCAdjustReset Release Completed..."
 
 cd "${BUILD_DIR}"
 
@@ -444,3 +307,4 @@ else
 #  rm -rf "${BUILD_DIR}/"
   open -a Safari https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/
 fi
+
